@@ -9,6 +9,7 @@ dependencies {
     modules(Modules.Libraries.core)
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
+    impl(Libs.Androidx.Constraintlayout)
     hilt()
     kotlin()
 }
