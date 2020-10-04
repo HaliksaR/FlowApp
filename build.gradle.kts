@@ -24,6 +24,9 @@ allprojects {
 }
 
 subProjects(Modules.Path.libraries, Modules.Path.feature) {
+    project.tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
     project.plugins.whenPluginAdded {
         when (this) {
             is AppPlugin -> applyAppPlugin(project)
@@ -55,9 +58,6 @@ fun applyLibraryPlugin(project: Project, path: String) {
     project.configure<BaseExtension> {
         compileSdkVersion(30)
         javaVersionSetups()
-        defaultConfig.javaCompileOptions.annotationProcessorOptions {
-            arguments + Libs.Androidx.Room.arguments(projectDir)
-        }
     }
 
     project.dependencies {
@@ -94,9 +94,6 @@ fun BaseExtension.javaVersionSetups() {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
     }
 }
 

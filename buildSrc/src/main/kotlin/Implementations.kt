@@ -60,11 +60,14 @@ fun DependencyHandler.okhttpMockWebServer() {
 }
 
 fun DependencyHandler.moshi() {
-    testImpl(Libs.Moshi)
+    impl(Libs.Moshi)
 }
 
 fun DependencyHandler.moshiForRetrofit() {
-    testImpl(Libs.Moshi.retrofit)
+    impl(Libs.Moshi)
+    impl(Libs.Moshi.kt)
+    impl(Libs.Moshi.converter)
+    impl(Libs.Moshi.adapter)
 }
 
 fun DependencyHandler.room() {
