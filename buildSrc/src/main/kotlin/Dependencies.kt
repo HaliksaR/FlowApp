@@ -7,7 +7,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.4.10"
+        private const val version = "1.3.72"
         private const val versionCoroutines =
             "1.3.9" // https://github.com/Kotlin/kotlinx.coroutines
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
