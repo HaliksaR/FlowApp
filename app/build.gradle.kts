@@ -6,10 +6,10 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Libraries.core)
+    modules(Modules.Libraries.core, Modules.Libraries.network)
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
     impl(Libs.Androidx.Constraintlayout)
-    hilt()
-    kotlin()
+    koin()
+    koinAndroidX()
 }
