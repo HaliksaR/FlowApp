@@ -4,7 +4,7 @@ import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 
-internal fun provideOkHttpClient(
+fun provideOkHttpClient(
     interceptors: List<Interceptor> = emptyList(),
     authenticators: List<Authenticator> = emptyList()
 ): OkHttpClient =

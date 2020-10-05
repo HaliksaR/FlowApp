@@ -4,10 +4,8 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.CallAdapter
 import retrofit2.Response
 import retrofit2.Retrofit
-import ru.haliksar.libraries.retroflow.adapters.BodyCallAdapter
-import ru.haliksar.libraries.retroflow.adapters.ResourceCallAdapter
+import ru.haliksar.libraries.retroflow.adapters.FlowCallAdapter
 import ru.haliksar.libraries.retroflow.adapters.ResponseCallAdapter
-import ru.haliksar.libraries.retroflow.wrapper.Resource
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
@@ -39,14 +37,6 @@ class RetroFlowCallAdapterFactory : CallAdapter.Factory() {
                 }
                 ResponseCallAdapter<Any>(type)
             }
-            Resource::class.java -> {
-                check(type is ParameterizedType) {
-                    "Response must be parameterized as Resource<Type> or Resource<out Type>"
-                }
-                ResourceCallAdapter<Any>(type)
-            }
-            else -> {
-                BodyCallAdapter<Any>(type)
-            }
+            else -> FlowCallAdapter<Any>(type)
         }
 }

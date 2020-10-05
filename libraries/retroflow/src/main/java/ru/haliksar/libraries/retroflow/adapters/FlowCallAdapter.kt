@@ -11,7 +11,7 @@ import java.lang.reflect.Type
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-internal class BodyCallAdapter<T : Any>(
+internal class FlowCallAdapter<T : Any>(
     private val responseType: Type
 ) : CallAdapter<T, Flow<T>> {
 
@@ -19,22 +19,21 @@ internal class BodyCallAdapter<T : Any>(
 
     override fun adapt(call: Call<T>): Flow<T> = flow {
         emit(
-            suspendCancellableCoroutine { coroutine ->
+            suspendCancellableCoroutine { continuation ->
                 call.enqueue(object : Callback<T> {
-
-                    override fun onFailure(call: Call<T>, t: Throwable) =
-                        coroutine.resumeWithException(t)
+                    override fun onFailure(call: Call<T>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
 
                     override fun onResponse(call: Call<T>, response: Response<T>) {
-                        val body = response.body()
-                        if (body != null) {
-                            coroutine.resume(body)
-                        } else {
-                            coroutine.resumeWithException(NullPointerException("Response can't be null"))
+                        try {
+                            continuation.resume(response.body()!!)
+                        } catch (exc: KotlinNullPointerException) {
+                            continuation.resumeWithException(exc)
                         }
                     }
                 })
-                coroutine.invokeOnCancellation { call.cancel() }
+                continuation.invokeOnCancellation { call.cancel() }
             }
         )
     }

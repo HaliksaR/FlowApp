@@ -9,5 +9,7 @@ object Modules {
     object Libraries {
         const val core = "${Path.libraries}:core"
         const val network = "${Path.libraries}:network"
+        const val fakeNetwork = "${Path.libraries}:fakenetwork"
+        const val retroFlow = "${Path.libraries}:retroflow"
     }
 }

@@ -4,6 +4,7 @@ import com.android.build.gradle.LibraryPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
+    val kotlin_version by extra("1.3.72")
     repositories {
         google()
         jcenter()
@@ -11,8 +12,8 @@ buildscript {
     dependencies {
         classpath(Libs.Gradle.androidPlugin)
         classpath(Libs.Kotlin.gradlePlugin)
-        classpath(Libs.Hilt.gradlePlugin)
         classpath(Libs.Koin.gradlePlugin)
+        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -20,6 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://jitpack.io")
     }
 }
 

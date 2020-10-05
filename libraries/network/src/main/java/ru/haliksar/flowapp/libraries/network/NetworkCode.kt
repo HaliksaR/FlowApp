@@ -11,8 +11,3 @@ object NetworkCode {
     const val OK = 200
     const val FAIL = 400
 }
-
-open class NetworkException(
-    override val message: String? = null,
-    val code: Int? = null
-) : Throwable()

@@ -18,14 +18,6 @@ object Libs {
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versionCoroutines"
     }
 
-    object Hilt { //https://developer.android.com/jetpack/androidx/releases/hilt
-        private const val version = "2.28-alpha"
-        const val android = "com.google.dagger:hilt-android:$version"
-        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
-        const val testing = "com.google.dagger:hilt-android-testing:$version"
-        const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
-    }
-
     object Koin { //https://github.com/InsertKoinIO/koin
         private const val version = "2.2.0-rc-1"
         const val gradlePlugin = "org.koin:koin-gradle-plugin:$version"
@@ -67,6 +59,11 @@ object Libs {
         const val kt = "com.squareup.moshi:moshi-kotlin:$version"
         const val adapter = "com.squareup.moshi:moshi-adapters:$version"
         const val converter = "com.squareup.retrofit2:converter-moshi:${Retrofit.version}"
+    }
+
+    object Gson {
+        override fun toString() = "com.google.code.gson:gson:2.8.6"
+        const val converter = "com.squareup.retrofit2:converter-gson:2.9.0"
     }
 
     object Androidx { // https://developer.android.com/jetpack/androidx/explorer
@@ -227,12 +224,18 @@ object Libs {
     }
 
     object RxKotlin { // https://github.com/ReactiveX/RxKotlin
-        private const val version = "3.0.1"
+        private const val version = "3.0.0"
         override fun toString() = "io.reactivex.rxjava3:rxkotlin:$version"
     }
 
     object RxJava {
-        private const val version = "3.0.1"
+        private const val version = "3.0.0"
         override fun toString() = "io.reactivex.rxjava3:rxjava:$version"
+        const val adapter = "com.github.akarnokd:rxjava3-retrofit-adapter:$version"
+    }
+
+    object RxAndroid {
+        private const val version = "3.0.0"
+        override fun toString() = "io.reactivex.rxjava3:rxandroid:$version"
     }
 }

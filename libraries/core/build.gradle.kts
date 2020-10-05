@@ -5,5 +5,8 @@ plugins {
 }
 
 dependencies {
-
+    impl(Libs.Androidx.Lifecycle.lifecycleViewModel)
+    impl(Libs.Androidx.Lifecycle.livedataKtx)
+    impl(Libs.Androidx.Lifecycle.runtimeKtx)
+    koin()
 }

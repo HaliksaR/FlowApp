@@ -6,10 +6,19 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Libraries.core, Modules.Libraries.network)
+    modules(
+        Modules.Libraries.core,
+        Modules.Libraries.network,
+        Modules.Libraries.fakeNetwork,
+        Modules.Libraries.retroFlow
+    )
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
     impl(Libs.Androidx.Constraintlayout)
     koin()
+    gson()
+    rxKotlin()
+    rxAndroid()
+    retrofit()
     koinAndroidX()
 }

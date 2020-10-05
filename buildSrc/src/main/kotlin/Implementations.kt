@@ -5,13 +5,6 @@ fun DependencyHandler.modules(vararg module: String) {
     module.forEach { impl(project(it)) }
 }
 
-fun DependencyHandler.hilt() {
-    impl(Libs.Hilt.android)
-    kapt(Libs.Hilt.compiler)
-    testImpl(Libs.Hilt.testing)
-    kaptTest(Libs.Hilt.compiler)
-}
-
 fun DependencyHandler.kotlin() {
     impl(Libs.Kotlin.stdlib)
 }
@@ -75,4 +68,25 @@ fun DependencyHandler.room() {
     kapt(Libs.Androidx.Room.compiler)
     impl(Libs.Androidx.Room.ktx)
     testImpl(Libs.Androidx.Room.testing)
+}
+
+fun DependencyHandler.gson() {
+    impl(Libs.Gson)
+}
+
+fun DependencyHandler.gsonRetrofit() {
+    impl(Libs.Gson)
+    impl(Libs.Gson.converter)
+}
+
+fun DependencyHandler.rxKotlin() {
+    impl(Libs.RxKotlin)
+}
+
+fun DependencyHandler.rxRetrofit() {
+    impl(Libs.RxJava.adapter)
+}
+
+fun DependencyHandler.rxAndroid() {
+    impl(Libs.RxAndroid)
 }
