@@ -9,10 +9,9 @@ dependencies {
     modules(
         Modules.Libraries.Core,
         Modules.Libraries.Network,
-        Modules.Libraries.Network.wrappers,
         Modules.Libraries.fakeNetwork,
         Modules.Libraries.retroFlow,
-        Modules.Features.User.SignIn.presentation
+        Modules.Features.User.SignIn.injector
     )
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
@@ -20,9 +19,5 @@ dependencies {
     impl(Libs.Androidx.Navigation.uiKtx)
     impl(Libs.Androidx.Navigation.fragmentKtx)
     koin()
-    gson()
-    rxKotlin()
-    rxAndroid()
-    retrofit()
     koinAndroidX()
 }
