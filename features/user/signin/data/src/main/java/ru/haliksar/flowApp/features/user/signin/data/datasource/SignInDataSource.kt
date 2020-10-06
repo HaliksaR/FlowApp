@@ -1,9 +1,9 @@
 package ru.haliksar.flowApp.features.user.signin.data.datasource
 
 import kotlinx.coroutines.flow.Flow
-import ru.haliksar.flowApp.features.user.signin.data.dto.AuthDto
-import ru.haliksar.flowApp.features.user.signin.data.dto.SignInDto
+import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
+import ru.haliksar.flowApp.features.user.signin.domain.entity.SignInEntity
 
 interface SignInDataSource {
-    fun signIn(data: SignInDto): Flow<AuthDto>
+    fun signIn(data: SignInEntity): Flow<AuthEntity>
 }
