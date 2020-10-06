@@ -5,7 +5,10 @@ plugins {
 }
 
 dependencies {
-    modules(":libraries:retroflow")
+    modules(
+        Modules.Libraries.retroFlow,
+        Modules.Libraries.Network.wrappers
+    )
     retrofit()
     gsonRetrofit()
     impl(Libs.Okhttp3.logging)

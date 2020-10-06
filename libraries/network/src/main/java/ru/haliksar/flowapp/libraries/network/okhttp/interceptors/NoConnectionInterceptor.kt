@@ -5,9 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import okhttp3.Interceptor
-import java.io.IOException
-
-class NoConnectivityException : IOException()
+import ru.haliksar.flowapp.libraries.network.wrappers.NoConnectivityException
 
 internal fun noConnectionInterceptor(context: Context) = Interceptor { chain ->
     if (isInternetAvailable(context)) {

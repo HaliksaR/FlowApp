@@ -5,7 +5,11 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Libraries.network)
+    modules(
+        Modules.Libraries.Network,
+        Modules.Libraries.Network.wrappers,
+        Modules.Features.User.SignIn.data
+    )
     retrofit()
     gsonRetrofit()
     impl(Libs.Okhttp3.logging)

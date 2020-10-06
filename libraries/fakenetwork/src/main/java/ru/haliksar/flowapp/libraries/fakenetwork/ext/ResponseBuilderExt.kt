@@ -5,7 +5,7 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import ru.haliksar.flowapp.libraries.fakenetwork.MEDIA_TYPE_JSON
-import ru.haliksar.flowapp.libraries.network.NetworkCode
+import ru.haliksar.flowapp.libraries.network.wrappers.NetworkCode
 
 
 internal fun Response.Builder.create(

@@ -4,7 +4,6 @@ import com.android.build.gradle.LibraryPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    val kotlin_version by extra("1.3.72")
     repositories {
         google()
         jcenter()
@@ -13,7 +12,6 @@ buildscript {
         classpath(Libs.Gradle.androidPlugin)
         classpath(Libs.Kotlin.gradlePlugin)
         classpath(Libs.Koin.gradlePlugin)
-        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -25,7 +23,12 @@ allprojects {
     }
 }
 
-subProjects(Modules.Path.libraries, Modules.Path.feature) {
+subProjects(
+    Modules.Libraries,
+    Modules.Features,
+    Modules.Features.User,
+    Modules.Features.User.SignIn
+) {
     project.tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
@@ -67,7 +70,7 @@ fun applyLibraryPlugin(project: Project, path: String) {
     }
 
     when {
-        path.startsWith(Modules.Path.libraries) -> {
+        path.startsWith(Modules.Libraries.toString()) -> {
             /*config*/
         }
     }
@@ -99,7 +102,7 @@ fun BaseExtension.javaVersionSetups() {
     }
 }
 
-fun subProjects(vararg folders: String, action: Action<in Project>) {
-    folders.forEach { if (project.path == it) return }
+fun subProjects(vararg folders: Any, action: Action<in Project>) {
+    folders.forEach { if (project.path == it.toString()) return }
     subprojects(action)
 }

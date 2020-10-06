@@ -4,13 +4,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.haliksar.flowapp.libraries.fakenetwork.fakeServerInterceptor
+import ru.haliksar.flowapp.libraries.network.di.FAKE
 import ru.haliksar.flowapp.libraries.network.di.LOG_INTERCEPTOR
 import ru.haliksar.flowapp.libraries.network.di.NO_CONNECT_INTERCEPTOR
 import ru.haliksar.flowapp.libraries.network.providers.provideOkHttpClient
 import ru.haliksar.flowapp.libraries.network.providers.provideRetrofit
 
-private const val FAKE_SERVER_INTERCEPTOR = "fakeServerInterceptor"
-private const val FAKE = "FAKE"
+const val FAKE_SERVER_INTERCEPTOR = "fakeServerInterceptor"
 
 val FakeNetworkModule = module {
     single(named(FAKE_SERVER_INTERCEPTOR)) {

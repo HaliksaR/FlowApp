@@ -5,6 +5,10 @@ fun DependencyHandler.modules(vararg module: String) {
     module.forEach { impl(project(it)) }
 }
 
+fun DependencyHandler.modules(vararg module: Any) {
+    module.forEach { impl(project(it.toString())) }
+}
+
 fun DependencyHandler.kotlin() {
     impl(Libs.Kotlin.stdlib)
 }
