@@ -18,6 +18,7 @@ dependencies {
     impl(Libs.Androidx.Fragment.ktx)
     impl(Libs.Androidx.Fragment)
     impl(Libs.Androidx.Fragment.testing)
+    impl(Libs.Material)
     coroutines()
     koin()
     koinAndroidX()

@@ -1,1 +1,5 @@
-<manifest package="ru.haliksar.flowapp.libraries.fakenetwork" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.haliksar.flowapp.libraries.fakenetwork">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

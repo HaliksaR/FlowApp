@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
@@ -51,7 +50,6 @@ class SignInViewModel : BaseViewModel() {
             viewModelScope.launch(Dispatchers.IO) {
                 useCase(signInMapper.toEntity(testData))
                     .collect {
-                        delay(400)
                         when (it) {
                             NetworkResponse.Loading -> uiState.loading()
                             is NetworkResponse.Success -> uiState.success(authMapper.toUiData(it.data))

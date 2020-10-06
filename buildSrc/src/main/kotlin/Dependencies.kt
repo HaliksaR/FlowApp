@@ -238,4 +238,9 @@ object Libs {
         private const val version = "3.0.0"
         override fun toString() = "io.reactivex.rxjava3:rxandroid:$version"
     }
+
+    object Material {
+        private const val version = "1.1.0"
+        override fun toString() = "com.google.android.material:material:$version"
+    }
 }
