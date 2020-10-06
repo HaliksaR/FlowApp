@@ -8,7 +8,7 @@ import okhttp3.Interceptor
 import ru.haliksar.flowapp.libraries.network.wrappers.NoConnectivityException
 
 internal fun noConnectionInterceptor(context: Context) = Interceptor { chain ->
-    if (isInternetAvailable(context)) {
+    if (!isInternetAvailable(context)) {
         throw NoConnectivityException()
     } else {
         chain.proceed(chain.request())

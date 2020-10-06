@@ -1,1 +1,7 @@
-<manifest package="ru.haliksar.flowapp.libraries.core" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.haliksar.flowapp.libraries.core">
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="30" />
+</manifest>
