@@ -13,6 +13,7 @@ include(
 )
 
 include(
+    ":features:user:signin:injector",
     ":features:user:signin:data",
     ":features:user:signin:domain",
     ":features:user:signin:presentation"

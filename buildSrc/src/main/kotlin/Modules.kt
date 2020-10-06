@@ -12,6 +12,7 @@ object Modules {
                 val domain = "$SignIn:domain"
                 val data = "$SignIn:data"
                 val presentation = "$SignIn:presentation"
+                val injector = "$SignIn:injector"
             }
         }
     }
