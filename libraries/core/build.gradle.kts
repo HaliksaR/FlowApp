@@ -4,6 +4,13 @@ plugins {
     id(Plugins.Kotlin.androidExtensions)
 }
 
+android {
+    defaultConfig {
+        minSdkVersion(AppConfigs.minSdkVersion)
+        targetSdkVersion(AppConfigs.targetSdkVersion)
+    }
+}
+
 dependencies {
     impl(Libs.Androidx.Lifecycle.lifecycleViewModel)
     impl(Libs.Androidx.Lifecycle.livedataKtx)

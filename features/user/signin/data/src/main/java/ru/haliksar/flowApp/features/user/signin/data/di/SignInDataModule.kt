@@ -11,10 +11,10 @@ import ru.haliksar.flowApp.features.user.signin.data.dto.SignInMapperDto
 import ru.haliksar.flowApp.features.user.signin.data.repository.SignInRepositoryImpl
 import ru.haliksar.flowApp.features.user.signin.domain.repository.SignInRepository
 import ru.haliksar.flowapp.libraries.network.createRetrofitService
-import ru.haliksar.flowapp.libraries.network.di.ORIGINAL
+import ru.haliksar.flowapp.libraries.network.di.FAKE
 
 internal val SignInApiModule = module {
-    factory<SignInApi> { createRetrofitService(get(named(ORIGINAL))) }
+    factory<SignInApi> { createRetrofitService(get(named(FAKE))) }
 }
 
 internal val SignInDataMappersModule = module {
@@ -22,11 +22,11 @@ internal val SignInDataMappersModule = module {
     factory { SignInMapperDto() }
 }
 
+@OptIn(KoinApiExtension::class)
 internal val SignInDataSourceModule = module {
     factory<SignInDataSource> { SignInDataSourceImpl(get()) }
 }
 
-@OptIn(KoinApiExtension::class)
 internal val SignInRepositoryModule = module {
     factory<SignInRepository> { SignInRepositoryImpl(get()) }
 }
