@@ -10,20 +10,12 @@ object Libs {
         private const val version = "1.3.72"
         private const val versionCoroutines =
             "1.3.9" // https://github.com/Kotlin/kotlinx.coroutines
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
         const val coroutinesAndroid =
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versionCoroutines"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versionCoroutines"
-    }
-
-    object Hilt { //https://developer.android.com/jetpack/androidx/releases/hilt
-        private const val version = "2.28-alpha"
-        const val android = "com.google.dagger:hilt-android:$version"
-        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
-        const val testing = "com.google.dagger:hilt-android-testing:$version"
-        const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
     }
 
     object Koin { //https://github.com/InsertKoinIO/koin
@@ -49,21 +41,29 @@ object Libs {
     }
 
     object Retrofit { // https://square.github.io/retrofit/
-        private const val version = "2.9.0"
+        const val version = "2.9.0"
         override fun toString() = "com.squareup.retrofit2:retrofit:$version"
+        const val converterScalars = "com.squareup.retrofit2:converter-scalars:$version"
     }
 
     object Okhttp3 { //https://github.com/square/okhttp
         private const val version = "4.9.0"
         override fun toString() = "com.squareup.okhttp3:okhttp:$version"
         const val mockWebServer = "com.squareup.okhttp3:mockwebserver:$version"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:$version"
     }
 
     object Moshi {
         private const val version = "1.9.3"
-        private const val versionRetrofit = "2.9.0"
         override fun toString() = "com.squareup.moshi:moshi:$version"
-        const val retrofit = "com.squareup.retrofit2:converter-moshi:$versionRetrofit"
+        const val kt = "com.squareup.moshi:moshi-kotlin:$version"
+        const val adapter = "com.squareup.moshi:moshi-adapters:$version"
+        const val converter = "com.squareup.retrofit2:converter-moshi:${Retrofit.version}"
+    }
+
+    object Gson {
+        override fun toString() = "com.google.code.gson:gson:2.8.6"
+        const val converter = "com.squareup.retrofit2:converter-gson:2.9.0"
     }
 
     object Androidx { // https://developer.android.com/jetpack/androidx/explorer
@@ -224,12 +224,18 @@ object Libs {
     }
 
     object RxKotlin { // https://github.com/ReactiveX/RxKotlin
-        private const val version = "3.0.1"
+        private const val version = "3.0.0"
         override fun toString() = "io.reactivex.rxjava3:rxkotlin:$version"
     }
 
     object RxJava {
-        private const val version = "3.0.1"
+        private const val version = "3.0.0"
         override fun toString() = "io.reactivex.rxjava3:rxjava:$version"
+        const val adapter = "com.github.akarnokd:rxjava3-retrofit-adapter:$version"
+    }
+
+    object RxAndroid {
+        private const val version = "3.0.0"
+        override fun toString() = "io.reactivex.rxjava3:rxandroid:$version"
     }
 }

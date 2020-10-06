@@ -11,7 +11,6 @@ buildscript {
     dependencies {
         classpath(Libs.Gradle.androidPlugin)
         classpath(Libs.Kotlin.gradlePlugin)
-        classpath(Libs.Hilt.gradlePlugin)
         classpath(Libs.Koin.gradlePlugin)
     }
 }
@@ -20,10 +19,19 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://jitpack.io")
     }
 }
 
-subProjects(Modules.Path.libraries, Modules.Path.feature) {
+subProjects(
+    Modules.Libraries,
+    Modules.Features,
+    Modules.Features.User,
+    Modules.Features.User.SignIn
+) {
+    project.tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+    }
     project.plugins.whenPluginAdded {
         when (this) {
             is AppPlugin -> applyAppPlugin(project)
@@ -55,9 +63,6 @@ fun applyLibraryPlugin(project: Project, path: String) {
     project.configure<BaseExtension> {
         compileSdkVersion(30)
         javaVersionSetups()
-        defaultConfig.javaCompileOptions.annotationProcessorOptions {
-            arguments + Libs.Androidx.Room.arguments(projectDir)
-        }
     }
 
     project.dependencies {
@@ -65,7 +70,7 @@ fun applyLibraryPlugin(project: Project, path: String) {
     }
 
     when {
-        path.startsWith(Modules.Path.libraries) -> {
+        path.startsWith(Modules.Libraries.toString()) -> {
             /*config*/
         }
     }
@@ -95,12 +100,9 @@ fun BaseExtension.javaVersionSetups() {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
 }
 
-fun subProjects(vararg folders: String, action: Action<in Project>) {
-    folders.forEach { if (project.path == it) return }
+fun subProjects(vararg folders: Any, action: Action<in Project>) {
+    folders.forEach { if (project.path == it.toString()) return }
     subprojects(action)
 }
