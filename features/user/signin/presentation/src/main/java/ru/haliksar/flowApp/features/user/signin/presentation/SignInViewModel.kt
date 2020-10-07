@@ -1,61 +1,77 @@
 package ru.haliksar.flowApp.features.user.signin.presentation
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import android.util.Log
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.inject
 import ru.haliksar.flowApp.features.user.signin.domain.usecase.SignInUseCase
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.AuthMapperUiData
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInMapperUiData
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInUiData
-import ru.haliksar.flowApp.features.user.signin.presentation.uistate.*
+import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
+import ru.haliksar.flowApp.features.user.signin.presentation.uistate.error
+import ru.haliksar.flowApp.features.user.signin.presentation.uistate.loading
+import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
 import ru.haliksar.flowapp.libraries.core.presentation.BaseViewModel
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
+@ExperimentalCoroutinesApi
 @KoinApiExtension
 class SignInViewModel : BaseViewModel() {
 
     private val useCase by inject<SignInUseCase>()
 
-    private val uiState = MutableLiveData<UiState>().apply {
-        input()
-    }
+    private val uiState = MutableStateFlow<UiState>(UiState.Input)
 
     private val signInMapper by inject<SignInMapperUiData>()
 
     private val authMapper by inject<AuthMapperUiData>()
 
-    private val testData = SignInUiData("", "")
+    val loginFlow = MutableStateFlow("")
+    val passwordFlow = MutableStateFlow("")
 
-    fun uiStateObserve(owner: LifecycleOwner, action: (UiState) -> Unit) =
-        uiState.observe(owner, Observer { action(it) })
+    fun uiStateObserve(scope: CoroutineScope, action: (UiState) -> Unit) =
+        uiState.onEach { action(it) }.launchIn(scope)
 
-    fun setLogin(login: String) {
-        uiState.input()
-        testData.login = login
+    init {
+        loginFlow.onEach {
+            Log.d("twoWayFlow", it)
+        }.launchIn(viewModelScope)
+        loginFlow.value = "twoWayFlow"
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                loginFlow.value = getRandomString(10)
+                delay(10000)
+            }
+        }
     }
 
-    fun setPassword(password: String) {
-        uiState.input()
-        testData.password = password
+    private fun getRandomString(length: Int): String {
+        val allowedChars = ('A'..'Z') + ('a'..'z')
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
     }
 
     fun startSignIn() {
-        if (testData.login.isNotEmpty() && testData.password.isNotEmpty()) {
+        if (loginFlow.value.isNotBlank() && passwordFlow.value.isNotBlank()) {
             viewModelScope.launch(Dispatchers.IO) {
-                useCase(signInMapper.toEntity(testData))
-                    .collect {
-                        when (it) {
-                            NetworkResponse.Loading -> uiState.loading()
-                            is NetworkResponse.Success -> uiState.success(authMapper.toUiData(it.data))
-                            is NetworkResponse.Error -> uiState.error(it.exception)
-                        }
+                useCase(
+                    signInMapper.toEntity(
+                        SignInUiData(loginFlow.value, passwordFlow.value)
+                    )
+                ).collect {
+                    when (it) {
+                        NetworkResponse.Loading -> uiState.loading()
+                        is NetworkResponse.Success -> uiState.success(authMapper.toUiData(it.data))
+                        is NetworkResponse.Error -> uiState.error(it.exception)
                     }
+                }
             }
         }
     }
