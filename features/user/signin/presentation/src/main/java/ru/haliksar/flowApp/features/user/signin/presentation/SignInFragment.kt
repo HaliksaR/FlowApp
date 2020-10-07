@@ -10,8 +10,9 @@ import kotlinx.android.synthetic.main.sign_in_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
-import ru.haliksar.flowApp.features.user.signin.presentation.ext.asFlow
 import ru.haliksar.flowApp.features.user.signin.presentation.ext.clicksFlow
+import ru.haliksar.flowApp.features.user.signin.presentation.ext.oneWayFlow
+import ru.haliksar.flowApp.features.user.signin.presentation.ext.twoWayFlow
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowapp.libraries.core.presentation.snack
 import ru.haliksar.flowapp.libraries.core.presentation.toast
@@ -31,35 +32,34 @@ class SignInFragment : Fragment() {
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        edit_text_login.asFlow(lifecycleScope) {
-            viewModel.setLogin(it.toString())
-        }
-        edit_text_password.asFlow(lifecycleScope) {
-            viewModel.setPassword(it.toString())
-        }
-        button_sign_in.clicksFlow(lifecycleScope, true) {
-            viewModel.startSignIn()
-        }
-        viewModel.uiStateObserve(viewLifecycleOwner) {
-            when (it) {
-                UiState.Input -> {
-                    content_container.visibility = View.VISIBLE
-                    loader.visibility = View.GONE
-                }
-                UiState.Loading -> {
-                    content_container.visibility = View.GONE
-                    loader.visibility = View.VISIBLE
-                    toast("Loading")
-                }
-                is UiState.Success -> {
-                    content_container.visibility = View.VISIBLE
-                    loader.visibility = View.GONE
-                    toast("Success ${it.data.accessToken}")
-                }
-                is UiState.Error -> {
-                    content_container.visibility = View.VISIBLE
-                    loader.visibility = View.GONE
-                    snack("Error ${it.error.code}")
+        with(viewModel) {
+            textView.oneWayFlow(lifecycleScope, loginFlow)
+            edit_text_login.twoWayFlow(lifecycleScope, loginFlow)
+            edit_text_password.twoWayFlow(lifecycleScope, passwordFlow)
+            button_sign_in.clicksFlow(lifecycleScope, true) {
+                startSignIn()
+            }
+            uiStateObserve(lifecycleScope) {
+                when (it) {
+                    UiState.Input -> {
+                        content_container.visibility = View.VISIBLE
+                        loader.visibility = View.GONE
+                    }
+                    UiState.Loading -> {
+                        content_container.visibility = View.GONE
+                        loader.visibility = View.VISIBLE
+                        toast("Loading")
+                    }
+                    is UiState.Success -> {
+                        content_container.visibility = View.VISIBLE
+                        loader.visibility = View.GONE
+                        toast("Success ${it.data.accessToken}")
+                    }
+                    is UiState.Error -> {
+                        content_container.visibility = View.VISIBLE
+                        loader.visibility = View.GONE
+                        snack("Error ${it.error.code}")
+                    }
                 }
             }
         }

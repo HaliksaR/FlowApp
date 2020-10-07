@@ -1,6 +1,7 @@
 package ru.haliksar.flowApp.features.user.signin.presentation.uistate
 
-import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.AuthUiData
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkException
 
@@ -11,14 +12,22 @@ sealed class UiState {
     data class Error(val error: NetworkException) : UiState()
 }
 
-internal fun MutableLiveData<UiState>.input() =
-    postValue(UiState.Input)
+@ExperimentalCoroutinesApi
+internal fun MutableStateFlow<UiState>.input() {
+    value = UiState.Input
+}
 
-internal fun MutableLiveData<UiState>.loading() =
-    postValue(UiState.Loading)
+@ExperimentalCoroutinesApi
+internal fun MutableStateFlow<UiState>.loading() {
+    value = UiState.Loading
+}
 
-internal fun MutableLiveData<UiState>.success(data: AuthUiData) =
-    postValue(UiState.Success(data))
+@ExperimentalCoroutinesApi
+internal fun MutableStateFlow<UiState>.success(data: AuthUiData) {
+    value = UiState.Success(data)
+}
 
-internal fun MutableLiveData<UiState>.error(error: NetworkException) =
-    postValue(UiState.Error(error))
+@ExperimentalCoroutinesApi
+internal fun MutableStateFlow<UiState>.error(error: NetworkException) {
+    value = UiState.Error(error)
+}
