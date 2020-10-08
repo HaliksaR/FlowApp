@@ -8,7 +8,9 @@ data class AuthDto(
     @SerializedName("accessToken") val accessToken: String
 )
 
-class AuthMapperDto : MapperDto<AuthEntity, AuthDto>() {
+typealias AuthMapperDtoT = MapperDto<AuthEntity, AuthDto>
+
+class AuthMapperDto : AuthMapperDtoT() {
 
     override fun toDto(entity: AuthEntity): AuthDto =
         AuthDto(entity.accessToken)

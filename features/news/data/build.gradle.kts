@@ -8,7 +8,8 @@ dependencies {
     modules(
         Modules.Libraries.Core.data,
         Modules.Libraries.Network,
-        Modules.Libraries.Network.wrappers
+        Modules.Libraries.Network.wrappers,
+        Modules.Features.News.domain
     )
     retrofit()
     coroutines()

@@ -1,4 +1,4 @@
-package flowapp.features.news.domain.entity
+package ru.haliksar.flowapp.features.news.domain.entity
 
 import java.util.*
 

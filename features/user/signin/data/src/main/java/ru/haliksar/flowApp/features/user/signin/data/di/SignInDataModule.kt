@@ -7,7 +7,9 @@ import ru.haliksar.flowApp.features.user.signin.data.api.SignInApi
 import ru.haliksar.flowApp.features.user.signin.data.datasource.SignInDataSource
 import ru.haliksar.flowApp.features.user.signin.data.datasource.SignInDataSourceImpl
 import ru.haliksar.flowApp.features.user.signin.data.dto.AuthMapperDto
+import ru.haliksar.flowApp.features.user.signin.data.dto.AuthMapperDtoT
 import ru.haliksar.flowApp.features.user.signin.data.dto.SignInMapperDto
+import ru.haliksar.flowApp.features.user.signin.data.dto.SignInMapperDtoT
 import ru.haliksar.flowApp.features.user.signin.data.repository.SignInRepositoryImpl
 import ru.haliksar.flowApp.features.user.signin.domain.repository.SignInRepository
 import ru.haliksar.flowapp.libraries.network.createRetrofitService
@@ -18,8 +20,8 @@ internal val SignInApiModule = module {
 }
 
 internal val SignInDataMappersModule = module {
-    factory { AuthMapperDto() }
-    factory { SignInMapperDto() }
+    factory<AuthMapperDtoT> { AuthMapperDto() }
+    factory<SignInMapperDtoT> { SignInMapperDto() }
 }
 
 @OptIn(KoinApiExtension::class)
