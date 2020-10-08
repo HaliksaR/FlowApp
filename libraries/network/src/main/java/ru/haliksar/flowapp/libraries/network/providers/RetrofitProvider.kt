@@ -6,8 +6,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import ru.haliksar.flowapp.libraries.network.converters.NullOnEmptyConverterFactory
 import ru.haliksar.libraries.retroflow.RetroFlowCallAdapterFactory
-import ru.haliksar.libraries.retroflow.converters.NullOnEmptyConverterFactory
 
 fun provideRetrofit(
     gson: Gson,

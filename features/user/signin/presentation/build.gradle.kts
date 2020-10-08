@@ -10,6 +10,7 @@ dependencies {
         Modules.Features.User.SignIn.data,
         Modules.Libraries.Core,
         Modules.Libraries.Core.data,
+        Modules.Libraries.Core.domain,
         Modules.Libraries.Network.wrappers
     )
     impl(Libs.Androidx.Lifecycle.lifecycleViewModel)

@@ -1,4 +1,4 @@
-package ru.haliksar.flowapp.libraries.network
+package ru.haliksar.flowapp.libraries.network.converters
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
@@ -16,7 +16,10 @@ class GsonKotlinAdapterFactory(
 ) : TypeAdapterFactory {
 
     companion object {
-        fun create(checkNulls: Boolean = true) = GsonKotlinAdapterFactory(checkNulls)
+        fun create(checkNulls: Boolean = true) =
+            GsonKotlinAdapterFactory(
+                checkNulls
+            )
     }
 
     private val Class<*>.isKotlinClass: Boolean
@@ -30,7 +33,13 @@ class GsonKotlinAdapterFactory(
         }
         val kClass = (type.rawType as Class<*>).kotlin
         @Suppress("UNCHECKED_CAST")
-        return Adapter(this, gson, type, kClass as KClass<T>, checkNulls)
+        return Adapter(
+            this,
+            gson,
+            type,
+            kClass as KClass<T>,
+            checkNulls
+        )
     }
 
     class Adapter<T : Any>(

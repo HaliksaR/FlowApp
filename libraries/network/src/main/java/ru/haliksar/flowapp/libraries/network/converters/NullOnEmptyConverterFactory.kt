@@ -1,4 +1,4 @@
-package ru.haliksar.libraries.retroflow.converters
+package ru.haliksar.flowapp.libraries.network.converters
 
 import okhttp3.ResponseBody
 import retrofit2.Converter
@@ -9,7 +9,8 @@ import java.lang.reflect.Type
 class NullOnEmptyConverterFactory : Converter.Factory() {
 
     companion object {
-        fun create(): Converter.Factory = NullOnEmptyConverterFactory()
+        fun create(): Converter.Factory =
+            NullOnEmptyConverterFactory()
     }
 
     override fun responseBodyConverter(

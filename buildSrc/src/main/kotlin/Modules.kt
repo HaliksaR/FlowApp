@@ -19,6 +19,14 @@ object Modules {
                 val injector = "$SignIn:injector"
             }
         }
+
+        object News {
+            override fun toString() = "$Features:news"
+            val domain = "$News:domain"
+            val data = "$News:data"
+            val presentation = "$News:presentation"
+            val injector = "$News:injector"
+        }
     }
 
     object Libraries {
@@ -27,6 +35,7 @@ object Modules {
         object Core {
             override fun toString() = "$Libraries:core"
             val data = "$Core:data"
+            val domain = "$Core:domain"
         }
 
         object Network {

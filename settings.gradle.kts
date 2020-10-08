@@ -8,7 +8,8 @@ include(":libraries:retroflow")
 
 include(
     ":libraries:core",
-    ":libraries:core:data"
+    ":libraries:core:data",
+    ":libraries:core:domain"
 )
 
 include(
@@ -21,4 +22,9 @@ include(
     ":features:user:signin:data",
     ":features:user:signin:domain",
     ":features:user:signin:presentation"
+)
+
+include(
+    ":features:news:data",
+    ":features:news:domain"
 )
