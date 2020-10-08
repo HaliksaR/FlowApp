@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import ru.haliksar.flowapp.libraries.network.okhttp.interceptors.loggingInterceptor
 import ru.haliksar.flowapp.libraries.network.okhttp.interceptors.noConnectionInterceptor
 import ru.haliksar.flowapp.libraries.network.okhttp.interceptors.timeoutInterceptor
+import ru.haliksar.flowapp.libraries.network.providers.provideGson
 import ru.haliksar.flowapp.libraries.network.providers.provideOkHttpClient
 import ru.haliksar.flowapp.libraries.network.providers.provideRetrofit
 
@@ -29,8 +30,11 @@ val NetworkModule = module {
             )
         )
     }
+    factory { provideGson() }
+
     factory(named(ORIGINAL)) {
         provideRetrofit(
+            gson = get(),
             okHttpClient = get(named(ORIGINAL)),
             url = "https://www.haliksar.fun"
         )
