@@ -15,6 +15,7 @@ internal fun noConnectionInterceptor(context: Context) = Interceptor { chain ->
     }
 }
 
+@Suppress("DEPRECATION")
 private fun isInternetAvailable(context: Context): Boolean {
     with(context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -19,7 +19,7 @@ internal class ResponseCallAdapter<T : Any>(
 
     override fun adapt(call: Call<T>): Flow<Response<T>> = flow {
         emit(
-            suspendCancellableCoroutine { coroutine ->
+            suspendCancellableCoroutine<Response<T>> { coroutine ->
                 call.enqueue(object : Callback<T> {
 
                     override fun onFailure(call: Call<T>, t: Throwable) =

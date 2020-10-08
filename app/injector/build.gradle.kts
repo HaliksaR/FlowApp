@@ -6,9 +6,9 @@ plugins {
 
 dependencies {
     modules(
-        Modules.Features.User.SignIn.domain,
-        Modules.Features.User.SignIn.presentation,
-        Modules.Features.User.SignIn.data
+        Modules.Features.User.SignIn.injector,
+        Modules.Libraries.fakeNetwork,
+        Modules.Libraries.Network
     )
     koin()
 }

@@ -1,5 +1,9 @@
 object Modules {
-    val app = ":app"
+    object App {
+        override fun toString() = ":app"
+        val injector = "$App:injector"
+        val navigation = "$App:navigation"
+    }
 
     object Features {
         override fun toString() = ":features"

@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-    impl(Libs.Kotlin.stdlib)
-    impl(Libs.Retrofit)
-    impl(Libs.Kotlin.coroutines)
+    retrofit()
+    coroutines()
 }

@@ -20,6 +20,7 @@ import ru.haliksar.flowapp.libraries.core.presentation.toast
 @KoinApiExtension
 class SignInFragment : Fragment() {
 
+    @ExperimentalCoroutinesApi
     private val viewModel by viewModel<SignInViewModel>()
 
     override fun onCreateView(
