@@ -17,9 +17,7 @@ class GsonKotlinAdapterFactory(
 
     companion object {
         fun create(checkNulls: Boolean = true) =
-            GsonKotlinAdapterFactory(
-                checkNulls
-            )
+            GsonKotlinAdapterFactory(checkNulls)
     }
 
     private val Class<*>.isKotlinClass: Boolean

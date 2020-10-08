@@ -6,15 +6,15 @@ import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkException
 
 sealed class UiState {
-    object Input : UiState()
+    object Nothing : UiState()
     object Loading : UiState()
-    data class Success(val data: NewsUiData) : UiState()
+    data class Success(val data: List<NewsUiData>) : UiState()
     data class Error(val error: NetworkException) : UiState()
 }
 
 @ExperimentalCoroutinesApi
-internal fun MutableStateFlow<UiState>.input() {
-    value = UiState.Input
+internal fun MutableStateFlow<UiState>.nothing() {
+    value = UiState.Nothing
 }
 
 @ExperimentalCoroutinesApi
@@ -23,7 +23,7 @@ internal fun MutableStateFlow<UiState>.loading() {
 }
 
 @ExperimentalCoroutinesApi
-internal fun MutableStateFlow<UiState>.success(data: NewsUiData) {
+internal fun MutableStateFlow<UiState>.success(data: List<NewsUiData>) {
     value = UiState.Success(data)
 }
 

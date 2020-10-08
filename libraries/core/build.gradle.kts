@@ -13,4 +13,5 @@ dependencies {
     impl(Libs.Androidx.Appcompat)
     impl(Libs.Material)
     koin()
+    coroutines()
 }

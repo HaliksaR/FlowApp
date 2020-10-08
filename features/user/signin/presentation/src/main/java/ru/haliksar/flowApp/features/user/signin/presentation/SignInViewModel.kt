@@ -2,11 +2,14 @@ package ru.haliksar.flowApp.features.user.signin.presentation
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
 import ru.haliksar.flowApp.features.user.signin.domain.di.SIGN_IN_USECASE
@@ -27,11 +30,11 @@ import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
 @ExperimentalCoroutinesApi
 @KoinApiExtension
-class SignInViewModel : BaseViewModel() {
+class SignInViewModel : BaseViewModel<UiState>() {
+
+    override val uiState = MutableStateFlow<UiState>(UiState.Input)
 
     private val useCase by useCase<SignInUseCaseT>(named(SIGN_IN_USECASE))
-
-    private val uiState = MutableStateFlow<UiState>(UiState.Input)
 
     private val signInMapper by mapperUiData<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA))
 
@@ -39,9 +42,6 @@ class SignInViewModel : BaseViewModel() {
 
     val loginFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")
-
-    fun uiStateObserve(scope: CoroutineScope, action: (UiState) -> Unit) =
-        uiState.onEach { action(it) }.launchIn(scope)
 
     init {
         loginFlow.onEach {

@@ -1,0 +1,50 @@
+[
+  {
+    "title": "title news1",
+    "description": "description news1",
+    "author": {
+      "name": "author 1",
+      "surname": "author 1",
+      "profileUrl": {
+        "link": "profileUrl link 1",
+        "text": "profileUrl text 1"
+      },
+      "avatarUrl": "avatarUrl 1"
+    },
+    "pictures": [
+      {
+        "link": "pictures 1 1 link",
+        "text": "profileUrl 1 1 text"
+      },
+      {
+        "link": "pictures 2 1 link",
+        "text": "profileUrl 2 1 text"
+      }
+    ],
+    "postDate": "1985-04-16T23:20:50.52Z"
+  },
+  {
+    "title": "title news2",
+    "description": "description news2",
+    "author": {
+      "name": "author 2",
+      "surname": "author 2",
+      "profileUrl": {
+        "link": "profileUrl link 2",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "avatarUrl 2"
+    },
+    "pictures": [
+      {
+        "link": "pictures 2  1 link",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "pictures 2 2 link",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  }
+]

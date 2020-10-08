@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import okhttp3.Response
 import ru.haliksar.flowApp.features.user.signin.data.api.SignInApi
+import ru.haliksar.flowapp.features.news.data.api.NewsApi
 import ru.haliksar.flowapp.libraries.fakenetwork.R
 import ru.haliksar.flowapp.libraries.fakenetwork.ext.create
 import ru.haliksar.flowapp.libraries.fakenetwork.ext.error404
@@ -17,7 +18,12 @@ internal fun post(context: Context, uri: Uri, response: Response.Builder): Respo
                 description = "Логин", body = context.getJson(R.raw.sign_in)
             )
         }
-
+        NewsApi.URL -> {
+            response.create(
+                code = 200,
+                description = "Логин", body = context.getJson(R.raw.news)
+            )
+        }
         else -> {
             response.error404()
         }

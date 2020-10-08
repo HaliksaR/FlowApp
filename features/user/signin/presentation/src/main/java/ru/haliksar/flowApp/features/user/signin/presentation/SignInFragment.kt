@@ -40,7 +40,7 @@ class SignInFragment : Fragment() {
             button_sign_in.clicksFlow(lifecycleScope, true) {
                 startSignIn()
             }
-            uiStateObserve(lifecycleScope) {
+            uiStateObserve {
                 when (it) {
                     UiState.Input -> {
                         content_container.visibility = View.VISIBLE

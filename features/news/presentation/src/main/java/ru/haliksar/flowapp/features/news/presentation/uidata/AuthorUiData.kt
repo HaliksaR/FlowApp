@@ -2,7 +2,9 @@ package ru.haliksar.flowapp.features.news.presentation.uidata
 
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
+import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.domain.entity.AuthorEntity
+import ru.haliksar.flowapp.features.news.presentation.di.URL_MAPPER_UIDATA
 import ru.haliksar.flowapp.libraries.core.data.MapperUiData
 import ru.haliksar.flowapp.libraries.core.data.mapperUiData
 
@@ -18,7 +20,7 @@ typealias AuthorMapperUiDataT = MapperUiData<AuthorEntity, AuthorUiData>
 @KoinApiExtension
 class AuthorMapperUiData : AuthorMapperUiDataT(), KoinComponent {
 
-    private val urlMapper by mapperUiData<UrlMapperUiDataT>()
+    private val urlMapper by mapperUiData<UrlMapperUiDataT>(named(URL_MAPPER_UIDATA))
 
     override fun toUiData(entity: AuthorEntity): AuthorUiData =
         AuthorUiData(
