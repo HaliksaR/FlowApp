@@ -4,6 +4,5 @@ plugins {
 }
 
 dependencies {
-    kotlin()
     coroutines()
 }

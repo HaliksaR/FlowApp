@@ -4,10 +4,7 @@ plugins {
 }
 
 dependencies {
-    modules(
-        Modules.Libraries.Network.wrappers
-    )
-    kotlin()
+    modules(Modules.Libraries.Network.wrappers)
     coroutines()
     koin()
 }

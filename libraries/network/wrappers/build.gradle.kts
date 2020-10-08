@@ -8,6 +8,7 @@ dependencies {
         Modules.Libraries.Core.data
     )
     kotlin()
+    gson()
     coroutines()
     retrofit()
 }

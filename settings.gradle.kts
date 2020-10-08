@@ -1,4 +1,8 @@
-include(":app")
+include(
+    ":app",
+    ":app:injector",
+    ":app:navigation"
+)
 include(":libraries:fakenetwork")
 include(":libraries:retroflow")
 

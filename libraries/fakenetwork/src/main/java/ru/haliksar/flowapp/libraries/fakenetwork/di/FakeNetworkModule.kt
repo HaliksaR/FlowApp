@@ -28,6 +28,7 @@ val FakeNetworkModule = module {
     }
     factory(named(FAKE)) {
         provideRetrofit(
+            gson = get(),
             okHttpClient = get(named(FAKE)),
             url = "https://www.haliksar.fun"
         )

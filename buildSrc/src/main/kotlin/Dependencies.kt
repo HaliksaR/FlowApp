@@ -2,12 +2,12 @@ import java.io.File
 
 object Libs {
     object Gradle {
-        private const val version = "4.0.1"
+        private const val version = "4.0.2"
         const val androidPlugin = "com.android.tools.build:gradle:$version"
     }
 
     object Kotlin {
-        private const val version = "1.3.72"
+        private const val version = "1.4.10"
         private const val versionCoroutines =
             "1.3.9" // https://github.com/Kotlin/kotlinx.coroutines
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
@@ -16,10 +16,11 @@ object Libs {
         const val coroutinesAndroid =
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versionCoroutines"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versionCoroutines"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
     }
 
     object Koin { //https://github.com/InsertKoinIO/koin
-        private const val version = "2.2.0-rc-1"
+        private const val version = "2.2.0-rc-2"
         const val gradlePlugin = "org.koin:koin-gradle-plugin:$version"
         const val core = "org.koin:koin-core:$version"
         const val coreExt = "org.koin:koin-core-ext:$version"

@@ -31,11 +31,13 @@ subProjects(
 ) {
     project.tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     project.plugins.whenPluginAdded {
         when (this) {
             is AppPlugin -> applyAppPlugin(project)
-            is LibraryPlugin -> applyLibraryPlugin(project, path)
+            is LibraryPlugin -> applyAndroidLibraryPlugin(project, path)
+            is JavaLibraryPlugin -> applyLibraryPlugin(project, path)
         }
     }
 }
@@ -53,13 +55,16 @@ fun applyAppPlugin(project: Project) {
         }
         buildTypesSetups()
         javaVersionSetups()
+        packagingOptions {
+            exclude("META-INF/*.kotlin_module")
+        }
     }
     project.dependencies {
         kotlin()
     }
 }
 
-fun applyLibraryPlugin(project: Project, path: String) {
+fun applyAndroidLibraryPlugin(project: Project, path: String) {
     project.configure<BaseExtension> {
         compileSdkVersion(30)
         javaVersionSetups()
@@ -68,11 +73,11 @@ fun applyLibraryPlugin(project: Project, path: String) {
     project.dependencies {
         kotlin()
     }
+}
 
-    when {
-        path.startsWith(Modules.Libraries.toString()) -> {
-            /*config*/
-        }
+fun applyLibraryPlugin(project: Project, path: String) {
+    project.dependencies {
+        kotlin()
     }
 }
 

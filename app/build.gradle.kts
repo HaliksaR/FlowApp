@@ -6,18 +6,10 @@ plugins {
 }
 
 dependencies {
-    modules(
-        Modules.Libraries.Core,
-        Modules.Libraries.Network,
-        Modules.Libraries.fakeNetwork,
-        Modules.Libraries.retroFlow,
-        Modules.Features.User.SignIn.injector
-    )
+    modules(Modules.App.injector)
+    modules(Modules.App.navigation)
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
-    impl(Libs.Androidx.Constraintlayout)
-    impl(Libs.Androidx.Navigation.uiKtx)
-    impl(Libs.Androidx.Navigation.fragmentKtx)
     koin()
     koinAndroidX()
 }

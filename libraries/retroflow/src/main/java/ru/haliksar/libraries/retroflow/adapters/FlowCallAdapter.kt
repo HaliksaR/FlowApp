@@ -19,7 +19,7 @@ internal class FlowCallAdapter<T : Any>(
 
     override fun adapt(call: Call<T>): Flow<T> = flow {
         emit(
-            suspendCancellableCoroutine { continuation ->
+            suspendCancellableCoroutine<T> { continuation ->
                 call.enqueue(object : Callback<T> {
                     override fun onFailure(call: Call<T>, t: Throwable) {
                         continuation.resumeWithException(t)

@@ -1,5 +1,6 @@
 package ru.haliksar.flowapp.libraries.network.wrappers
 
+import com.google.gson.JsonParseException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -47,6 +48,7 @@ fun Throwable.toNetworkException(): NetworkException {
         is UnknownHostException -> NetworkCode.SERVER_CONNECTION_ERROR
         is NoConnectivityException -> NetworkCode.INTERNET_CONNECTION_ERROR
         is HttpException -> this.code()
+        is JsonParseException -> NetworkCode.MISSING_VALUE
         is KotlinNullPointerException -> NetworkCode.EMPTY_BODY
         else -> NetworkCode.UNKNOWN
     }
