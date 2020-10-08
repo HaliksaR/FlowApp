@@ -19,9 +19,12 @@ internal val SignInApiModule = module {
     factory<SignInApi> { createRetrofitService(get(named(FAKE))) }
 }
 
+const val AUTH_MAPPER_DTO = "AUTH_MAPPER_DTO"
+const val SIGN_IN_MAPPER_DTO = "SIGN_IN_MAPPER_DTO"
+
 internal val SignInDataMappersModule = module {
-    factory<AuthMapperDtoT> { AuthMapperDto() }
-    factory<SignInMapperDtoT> { SignInMapperDto() }
+    factory<AuthMapperDtoT>(named(AUTH_MAPPER_DTO)) { AuthMapperDto() }
+    factory<SignInMapperDtoT>(named(SIGN_IN_MAPPER_DTO)) { SignInMapperDto() }
 }
 
 @OptIn(KoinApiExtension::class)

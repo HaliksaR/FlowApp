@@ -8,7 +8,9 @@ data class SignInUiData(
     var password: String
 )
 
-class SignInMapperUiData : MapperUiData<SignInEntity, SignInUiData>() {
+typealias SignInMapperUiDataT = MapperUiData<SignInEntity, SignInUiData>
+
+class SignInMapperUiData : SignInMapperUiDataT() {
 
     override fun toUiData(entity: SignInEntity): SignInUiData =
         SignInUiData(entity.login, entity.password)

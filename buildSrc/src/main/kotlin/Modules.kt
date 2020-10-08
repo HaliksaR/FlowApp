@@ -45,5 +45,6 @@ object Modules {
 
         val fakeNetwork = "$Libraries:fakenetwork"
         val retroFlow = "$Libraries:retroflow"
+        val fllowbinding = "$Libraries:flowbinding"
     }
 }

@@ -3,6 +3,9 @@ package ru.haliksar.flowapp.features.news.data.dto
 import com.google.gson.annotations.SerializedName
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
+import org.koin.core.qualifier.named
+import ru.haliksar.flowapp.features.news.data.di.AUTHOR_MAPPER_DTO
+import ru.haliksar.flowapp.features.news.data.di.URL_MAPPER_DTO
 import ru.haliksar.flowapp.features.news.domain.entity.NewsEntity
 import ru.haliksar.flowapp.libraries.core.data.MapperDto
 import ru.haliksar.flowapp.libraries.core.data.mapperDto
@@ -21,8 +24,8 @@ typealias NewsMapperDtoT = MapperDto<NewsEntity, NewsDto>
 @KoinApiExtension
 class NewsMapperDto : NewsMapperDtoT(), KoinComponent {
 
-    private val authorMapper by mapperDto<AuthorMapperDtoT>()
-    private val urlMapper by mapperDto<UrlMapperDtoT>()
+    private val authorMapper by mapperDto<AuthorMapperDtoT>(named(AUTHOR_MAPPER_DTO))
+    private val urlMapper by mapperDto<UrlMapperDtoT>(named(URL_MAPPER_DTO))
 
     override fun toDto(entity: NewsEntity): NewsDto =
         NewsDto(

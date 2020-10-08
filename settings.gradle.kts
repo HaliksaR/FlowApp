@@ -5,6 +5,7 @@ include(
 )
 include(":libraries:fakenetwork")
 include(":libraries:retroflow")
+include(":libraries:flowbinding")
 
 include(
     ":libraries:core",
@@ -25,6 +26,8 @@ include(
 )
 
 include(
+    ":features:news:injector",
     ":features:news:data",
-    ":features:news:domain"
+    ":features:news:domain",
+    ":features:news:presentation"
 )

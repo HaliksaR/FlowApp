@@ -2,10 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/global_navigation"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/newsFragment">
 
     <fragment
         android:id="@+id/signInFragment"
         android:name="ru.haliksar.flowApp.features.user.signin.presentation.SignInFragment"
         android:label="SignInFragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ru.haliksar.flowapp.features.news.presentation.NewsFragment"
+        android:label="NewsFragment">
+        <action
+            android:id="@+id/action_newsFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>

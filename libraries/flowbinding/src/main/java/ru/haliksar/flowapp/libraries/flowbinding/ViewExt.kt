@@ -1,4 +1,4 @@
-package ru.haliksar.flowApp.features.user.signin.presentation.ext
+package ru.haliksar.flowapp.libraries.flowbinding
 
 import android.view.View
 import kotlinx.coroutines.CoroutineScope
@@ -18,6 +18,16 @@ fun View.clicksFlow(scope: CoroutineScope, closeKeyBoard: Boolean, action: () ->
         if (closeKeyBoard) {
             hideKeyboard()
         }
+        action()
+    }.launchIn(scope)
+}
+
+@ExperimentalCoroutinesApi
+fun View.clicksFlow(scope: CoroutineScope, action: () -> Unit) {
+    callbackFlow {
+        setOnClickListener { offer(it) }
+        awaitClose { setOnClickListener(null) }
+    }.onEach {
         action()
     }.launchIn(scope)
 }

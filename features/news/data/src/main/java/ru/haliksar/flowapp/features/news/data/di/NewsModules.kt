@@ -16,11 +16,15 @@ internal val NewsApiModule = module {
     factory<NewsApi> { createRetrofitService(get(named(FAKE))) }
 }
 
+const val NEWS_MAPPER_DTO = "NEWS_MAPPER_DTO"
+const val AUTHOR_MAPPER_DTO = "AUTHOR_MAPPER_DTO"
+const val URL_MAPPER_DTO = "URL_MAPPER_DTO"
+
 @OptIn(KoinApiExtension::class)
 internal val NewsDataMappersModule = module {
-    factory<NewsMapperDtoT> { NewsMapperDto() }
-    factory<AuthorMapperDtoT> { AuthorMapperDto() }
-    factory<UrlMapperDtoT> { UrlMapperDto() }
+    factory<NewsMapperDtoT>(named(NEWS_MAPPER_DTO)) { NewsMapperDto() }
+    factory<AuthorMapperDtoT>(named(AUTHOR_MAPPER_DTO)) { AuthorMapperDto() }
+    factory<UrlMapperDtoT>(named(URL_MAPPER_DTO)) { UrlMapperDto() }
 }
 
 @OptIn(KoinApiExtension::class)

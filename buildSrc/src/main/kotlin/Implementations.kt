@@ -94,3 +94,15 @@ fun DependencyHandler.rxRetrofit() {
 fun DependencyHandler.rxAndroid() {
     impl(Libs.RxAndroid)
 }
+
+fun DependencyHandler.fragment() {
+    impl(Libs.Androidx.Fragment.ktx)
+    impl(Libs.Androidx.Fragment)
+    impl(Libs.Androidx.Fragment.testing)
+}
+
+fun DependencyHandler.navigation() {
+    impl(Libs.Androidx.Navigation.uiKtx)
+    impl(Libs.Androidx.Navigation.fragmentKtx)
+    androidTestImpl(Libs.Androidx.Navigation.testing)
+}

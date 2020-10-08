@@ -8,15 +8,19 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.inject
+import org.koin.core.qualifier.named
+import ru.haliksar.flowApp.features.user.signin.domain.di.SIGN_IN_USECASE
 import ru.haliksar.flowApp.features.user.signin.domain.usecase.SignInUseCaseT
-import ru.haliksar.flowApp.features.user.signin.presentation.uidata.AuthMapperUiData
-import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInMapperUiData
+import ru.haliksar.flowApp.features.user.signin.presentation.di.AUTH_MAPPER_UIDATA
+import ru.haliksar.flowApp.features.user.signin.presentation.di.SIGN_IN_MAPPER_UIDATA
+import ru.haliksar.flowApp.features.user.signin.presentation.uidata.AuthMapperUiDataT
+import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInMapperUiDataT
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInUiData
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.error
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.loading
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
+import ru.haliksar.flowapp.libraries.core.data.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
 import ru.haliksar.flowapp.libraries.core.presentation.BaseViewModel
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
@@ -25,13 +29,13 @@ import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 @KoinApiExtension
 class SignInViewModel : BaseViewModel() {
 
-    private val useCase by useCase<SignInUseCaseT>()
+    private val useCase by useCase<SignInUseCaseT>(named(SIGN_IN_USECASE))
 
     private val uiState = MutableStateFlow<UiState>(UiState.Input)
 
-    private val signInMapper by inject<SignInMapperUiData>()
+    private val signInMapper by mapperUiData<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA))
 
-    private val authMapper by inject<AuthMapperUiData>()
+    private val authMapper by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
 
     val loginFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")

@@ -7,8 +7,10 @@ plugins {
 dependencies {
     modules(
         Modules.Features.User.SignIn.injector,
+        Modules.Features.News.injector,
         Modules.Libraries.fakeNetwork,
-        Modules.Libraries.Network
+        Modules.Libraries.Network,
+        Modules.App.navigation
     )
     koin()
 }

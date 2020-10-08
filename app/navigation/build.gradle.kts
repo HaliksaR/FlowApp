@@ -5,7 +5,6 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Features.User.SignIn.presentation)
-    impl(Libs.Androidx.Navigation.uiKtx)
-    impl(Libs.Androidx.Navigation.fragmentKtx)
+    navigation()
+    koin()
 }

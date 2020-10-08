@@ -1,4 +1,4 @@
-package ru.haliksar.flowApp.features.user.signin.presentation.ext
+package ru.haliksar.flowapp.libraries.flowbinding
 
 import android.widget.EditText
 import android.widget.TextView
