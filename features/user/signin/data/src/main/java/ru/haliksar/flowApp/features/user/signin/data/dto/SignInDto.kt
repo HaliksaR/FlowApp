@@ -9,7 +9,9 @@ data class SignInDto(
     @SerializedName("password") val password: String
 )
 
-class SignInMapperDto : MapperDto<SignInEntity, SignInDto>() {
+typealias SignInMapperDtoT = MapperDto<SignInEntity, SignInDto>
+
+class SignInMapperDto : SignInMapperDtoT() {
 
     override fun toDto(entity: SignInEntity): SignInDto =
         SignInDto(entity.login, entity.password)

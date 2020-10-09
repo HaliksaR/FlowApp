@@ -160,8 +160,6 @@ object Libs {
 
         object Navigation { //https://developer.android.com/jetpack/androidx/releases/navigation
             private const val version = "2.3.0"
-            const val fragment = "androidx.navigation:navigation-fragment:$version"
-            const val ui = "androidx.navigation:navigation-ui:$version"
             const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
             const val testing = "androidx.navigation:navigation-testing:$version"
@@ -243,5 +241,15 @@ object Libs {
     object Material {
         private const val version = "1.1.0"
         override fun toString() = "com.google.android.material:material:$version"
+    }
+
+    object Adapterdelegates4 {
+        private const val version = "4.3.0"
+        override fun toString() = "com.hannesdorfmann:adapterdelegates4:$version"
+    }
+
+    object Coil {
+        private const val version = "1.0.0-rc3"
+        override fun toString() = "io.coil-kt:coil:$version"
     }
 }

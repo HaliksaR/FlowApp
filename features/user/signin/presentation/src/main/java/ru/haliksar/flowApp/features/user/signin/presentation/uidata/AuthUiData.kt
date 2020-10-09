@@ -7,7 +7,10 @@ data class AuthUiData(
     val accessToken: String
 )
 
-class AuthMapperUiData : MapperUiData<AuthEntity, AuthUiData>() {
+
+typealias AuthMapperUiDataT = MapperUiData<AuthEntity, AuthUiData>
+
+class AuthMapperUiData : AuthMapperUiDataT() {
 
     override fun toUiData(entity: AuthEntity): AuthUiData =
         AuthUiData(entity.accessToken)

@@ -10,28 +10,26 @@ import java.net.UnknownHostException
 fun <T> safeCallFlow(
     action: suspend () -> Flow<T>
 ): Flow<NetworkResponse<out T>> = flow {
-    emit(NetworkResponse.Loading)
     try {
         action().collect { emit(NetworkResponse.Success(it)) }
-    } catch (throwable: Throwable) {
-        emit(checkThrowable(throwable))
+    } catch (exception: Exception) {
+        emit(checkException(exception))
     }
 }
 
 fun <T> safeCallFlowEmpty(
     action: suspend () -> Flow<T?>
 ): Flow<NetworkResponse<out T?>> = flow {
-    emit(NetworkResponse.Loading)
     try {
         action().collect { emit(NetworkResponse.Success(it)) }
     } catch (npe: KotlinNullPointerException) {
-        NetworkResponse.Success(
-            null
-        )
+        NetworkResponse.Success(null)
+    } catch (npe: NullPointerException) {
+        NetworkResponse.Success(null)
     } catch (httpE: HttpException) {
-        emit(checkThrowable(httpE))
-    } catch (throwable: Throwable) {
-        emit(checkThrowable(throwable))
+        emit(checkException(httpE))
+    } catch (exception: Exception) {
+        emit(checkException(exception))
     }
 }
 
@@ -39,25 +37,26 @@ suspend fun <T> safeCall(
     action: suspend () -> T
 ): NetworkResponse<out T> = try {
     NetworkResponse.Success(action())
-} catch (throwable: Throwable) {
-    checkThrowable(throwable)
+} catch (exception: Exception) {
+    checkException(exception)
 }
 
-fun Throwable.toNetworkException(): NetworkException {
+fun Exception.toNetworkException(): NetworkException {
     val code = when (this) {
         is UnknownHostException -> NetworkCode.SERVER_CONNECTION_ERROR
         is NoConnectivityException -> NetworkCode.INTERNET_CONNECTION_ERROR
         is HttpException -> this.code()
         is JsonParseException -> NetworkCode.MISSING_VALUE
+        is NullPointerException,
         is KotlinNullPointerException -> NetworkCode.EMPTY_BODY
         else -> NetworkCode.UNKNOWN
     }
     return NetworkException(
         message = this.message,
         code = code,
-        throwable = this
+        exception = this
     )
 }
 
-private fun checkThrowable(throwable: Throwable): NetworkResponse.Error =
-    NetworkResponse.Error(throwable.toNetworkException())
+private fun checkException(exception: Exception): NetworkResponse.Error =
+    NetworkResponse.Error(exception.toNetworkException())

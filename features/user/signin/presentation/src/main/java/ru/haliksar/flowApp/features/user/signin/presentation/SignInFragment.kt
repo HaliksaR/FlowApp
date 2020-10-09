@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.sign_in_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
-import ru.haliksar.flowApp.features.user.signin.presentation.ext.clicksFlow
-import ru.haliksar.flowApp.features.user.signin.presentation.ext.oneWayFlow
-import ru.haliksar.flowApp.features.user.signin.presentation.ext.twoWayFlow
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
-import ru.haliksar.flowapp.libraries.core.presentation.snack
-import ru.haliksar.flowapp.libraries.core.presentation.toast
+import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
+import ru.haliksar.flowapp.libraries.core.presentation.ext.toast
+import ru.haliksar.flowapp.libraries.flowbinding.clicksFlow
+import ru.haliksar.flowapp.libraries.flowbinding.oneWayFlow
+import ru.haliksar.flowapp.libraries.flowbinding.twoWayFlow
 
 @KoinApiExtension
 class SignInFragment : Fragment() {
@@ -40,7 +40,7 @@ class SignInFragment : Fragment() {
             button_sign_in.clicksFlow(lifecycleScope, true) {
                 startSignIn()
             }
-            uiStateObserve(lifecycleScope) {
+            uiStateObserve {
                 when (it) {
                     UiState.Input -> {
                         content_container.visibility = View.VISIBLE

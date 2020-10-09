@@ -8,7 +8,8 @@ dependencies {
     modules(
         Modules.Libraries.Network,
         Modules.Libraries.Network.wrappers,
-        Modules.Features.User.SignIn.data
+        Modules.Features.User.SignIn.data,
+        Modules.Features.News.data
     )
     retrofit()
     gsonRetrofit()
