@@ -7,7 +7,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.haliksar.flowapp.libraries.core.presentation.hideKeyboard
+import ru.haliksar.flowapp.libraries.core.presentation.ext.hideKeyboard
 
 @ExperimentalCoroutinesApi
 fun View.clicksFlow(scope: CoroutineScope, closeKeyBoard: Boolean, action: () -> Unit) {
