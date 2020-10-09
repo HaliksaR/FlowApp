@@ -18,6 +18,6 @@ class NewsDataSourceImpl(
 
     private val mapper by mapperDto<NewsMapperDtoT>(named(NEWS_MAPPER_DTO))
 
-    override fun getNews(authKey: String): Flow<List<NewsEntity>> =
-        api.getNews(authKey).toListEntityOrEmpty(mapper)
+    override fun getNews(pageStartIndex: Int): Flow<List<NewsEntity>> =
+        api.getNews(pageStartIndex).toListEntityOrEmpty(mapper)
 }

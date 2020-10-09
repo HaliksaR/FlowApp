@@ -1,0 +1,251 @@
+[
+  {
+    "id": 1,
+    "title": "title news1",
+    "description": "description news1",
+    "author": {
+      "name": "author 1",
+      "surname": "author 1",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 1"
+      },
+      "avatarUrl": "https://sun9-45.userapi.com/impg/R9zsKXmYAv4AAj2nykVx-_nsG2sVOKBXa2V7Yw/dd-fblI75cw.jpg?size=200x0&quality=90&crop=621,797,586,586&sign=9b3bf5543d9d4102f314c00c9cb35c52&ava=1"
+    },
+    "pictures": [
+      {
+        "link": "https://sun9-5.userapi.com/c857332/v857332159/17b256/7-wYlitlOe0.jpg",
+        "text": "profileUrl 1 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      }
+    ],
+    "postDate": "1985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 2,
+    "title": "title news2",
+    "description": "description news2",
+    "author": {
+      "name": "author 2",
+      "surname": "author 2",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2020/07/solar_orbiter_s_first_views_of_the_sun5/22136942-2-eng-GB/Solar_Orbiter_s_first_views_of_the_Sun_pillars.gif"
+    },
+    "pictures": [
+      {
+        "link": "https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 3,
+    "title": "title news3",
+    "description": "description news3",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://i.pinimg.com/originals/ca/76/0b/ca760b70976b52578da88e06973af542.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 5,
+    "title": "title news5",
+    "description": "description news5",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.eso.org/images/thumb300y/eso1322a.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&w=1000&q=80",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.istockphoto.com/resources/images/HomePage/FourPack/Illustrations-907872186.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 6,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 7,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 8,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 9,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 10,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  }
+]

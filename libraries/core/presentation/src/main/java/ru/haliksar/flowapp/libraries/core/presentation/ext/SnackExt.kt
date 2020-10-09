@@ -1,4 +1,4 @@
-package ru.haliksar.flowapp.libraries.core.presentation
+package ru.haliksar.flowapp.libraries.core.presentation.ext
 
 import android.view.View
 import androidx.annotation.StringRes
@@ -6,10 +6,19 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.snack(message: String, length: Int = Snackbar.LENGTH_LONG) =
-    snack(requireView(), message, length)
+    snack(
+        requireView(),
+        message,
+        length
+    )
 
 fun Fragment.snack(@StringRes messageId: Int, length: Int = Snackbar.LENGTH_LONG) =
-    snack(requireView(), null, messageId, length)
+    snack(
+        requireView(),
+        null,
+        messageId,
+        length
+    )
 
 fun snack(
     view: View,

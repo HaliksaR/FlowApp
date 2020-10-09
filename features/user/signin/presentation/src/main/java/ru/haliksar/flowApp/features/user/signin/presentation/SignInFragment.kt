@@ -11,8 +11,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
-import ru.haliksar.flowapp.libraries.core.presentation.snack
-import ru.haliksar.flowapp.libraries.core.presentation.toast
+import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
+import ru.haliksar.flowapp.libraries.core.presentation.ext.toast
 import ru.haliksar.flowapp.libraries.flowbinding.clicksFlow
 import ru.haliksar.flowapp.libraries.flowbinding.oneWayFlow
 import ru.haliksar.flowapp.libraries.flowbinding.twoWayFlow

@@ -25,7 +25,7 @@ import ru.haliksar.flowApp.features.user.signin.presentation.uistate.loading
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
 import ru.haliksar.flowapp.libraries.core.data.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
-import ru.haliksar.flowapp.libraries.core.presentation.BaseViewModel
+import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewModel
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
 @ExperimentalCoroutinesApi
@@ -65,6 +65,7 @@ class SignInViewModel : BaseViewModel<UiState>() {
 
     fun startSignIn() {
         if (loginFlow.value.isNotBlank() && passwordFlow.value.isNotBlank()) {
+            uiState.loading()
             viewModelScope.launch(Dispatchers.IO) {
                 useCase(
                     signInMapper.toEntity(
@@ -72,7 +73,6 @@ class SignInViewModel : BaseViewModel<UiState>() {
                     )
                 ).collect {
                     when (it) {
-                        NetworkResponse.Loading -> uiState.loading()
                         is NetworkResponse.Success -> uiState.success(authMapper.toUiData(it.data))
                         is NetworkResponse.Error -> uiState.error(it.exception)
                     }

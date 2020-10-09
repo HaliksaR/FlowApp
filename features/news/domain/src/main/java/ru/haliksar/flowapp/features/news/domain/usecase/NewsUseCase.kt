@@ -6,11 +6,11 @@ import ru.haliksar.flowapp.features.news.domain.repository.NewsRepository
 import ru.haliksar.flowapp.libraries.core.domain.UseCase
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
-typealias NewsUseCaseT = UseCase<Flow<NetworkResponse<out List<NewsEntity>>>, String>
+typealias NewsUseCaseT = UseCase<Flow<NetworkResponse<out List<NewsEntity>>>, Int>
 
 class NewsUseCase(private val repository: NewsRepository) :
     NewsUseCaseT {
 
-    override operator fun invoke(param: String): Flow<NetworkResponse<out List<NewsEntity>>> =
+    override operator fun invoke(param: Int): Flow<NetworkResponse<out List<NewsEntity>>> =
         repository.getNews(param)
 }

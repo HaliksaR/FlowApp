@@ -28,7 +28,7 @@ internal class FlowCallAdapter<T : Any>(
                     override fun onResponse(call: Call<T>, response: Response<T>) {
                         try {
                             continuation.resume(response.body()!!)
-                        } catch (exc: KotlinNullPointerException) {
+                        } catch (exc: Exception) {
                             continuation.resumeWithException(exc)
                         }
                     }

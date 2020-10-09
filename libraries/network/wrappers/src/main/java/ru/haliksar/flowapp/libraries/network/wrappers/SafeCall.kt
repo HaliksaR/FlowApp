@@ -10,7 +10,6 @@ import java.net.UnknownHostException
 fun <T> safeCallFlow(
     action: suspend () -> Flow<T>
 ): Flow<NetworkResponse<out T>> = flow {
-    emit(NetworkResponse.Loading)
     try {
         action().collect { emit(NetworkResponse.Success(it)) }
     } catch (exception: Exception) {
@@ -21,10 +20,11 @@ fun <T> safeCallFlow(
 fun <T> safeCallFlowEmpty(
     action: suspend () -> Flow<T?>
 ): Flow<NetworkResponse<out T?>> = flow {
-    emit(NetworkResponse.Loading)
     try {
         action().collect { emit(NetworkResponse.Success(it)) }
     } catch (npe: KotlinNullPointerException) {
+        NetworkResponse.Success(null)
+    } catch (npe: NullPointerException) {
         NetworkResponse.Success(null)
     } catch (httpE: HttpException) {
         emit(checkException(httpE))
@@ -47,6 +47,7 @@ fun Exception.toNetworkException(): NetworkException {
         is NoConnectivityException -> NetworkCode.INTERNET_CONNECTION_ERROR
         is HttpException -> this.code()
         is JsonParseException -> NetworkCode.MISSING_VALUE
+        is NullPointerException,
         is KotlinNullPointerException -> NetworkCode.EMPTY_BODY
         else -> NetworkCode.UNKNOWN
     }

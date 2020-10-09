@@ -36,6 +36,7 @@ object Modules {
             override fun toString() = "$Libraries:core"
             val data = "$Core:data"
             val domain = "$Core:domain"
+            val presentation = "$Core:presentation"
         }
 
         object Network {
@@ -46,5 +47,6 @@ object Modules {
         val fakeNetwork = "$Libraries:fakenetwork"
         val retroFlow = "$Libraries:retroflow"
         val fllowbinding = "$Libraries:flowbinding"
+        val paging = "$Libraries:paging"
     }
 }

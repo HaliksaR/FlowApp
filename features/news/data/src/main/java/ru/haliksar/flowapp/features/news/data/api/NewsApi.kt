@@ -11,5 +11,5 @@ interface NewsApi {
     }
 
     @POST(URL)
-    fun getNews(@Query("authKey") authKey: String): Flow<List<NewsDto>?>
+    fun getNews(@Query("pageNumber") pageNumber: Int): Flow<List<NewsDto>?>
 }

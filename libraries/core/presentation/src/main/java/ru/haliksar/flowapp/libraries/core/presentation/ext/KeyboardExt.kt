@@ -1,11 +1,13 @@
-package ru.haliksar.flowapp.libraries.core.presentation
+package ru.haliksar.flowapp.libraries.core.presentation.ext
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.view.ContextThemeWrapper
 
+@SuppressLint("NewApi")
 fun Activity.hideKeyboard(delay: Long = 10L, view: View?) {
     val focusedView = view ?: currentFocus ?: return
     if (delay == 0L) {
@@ -20,6 +22,7 @@ fun Activity.hideKeyboard(delay: Long = 10L, view: View?) {
     }, delay)
 }
 
+@SuppressLint("NewApi")
 fun Activity.hideKeyboard(view: View) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(view.windowToken, 0)
@@ -38,6 +41,7 @@ fun Context.hideKeyboard(delay: Long = 10L, view: View? = null) {
 
 fun Activity.forceHideKeyboard() = hideKeyboard(0L)
 
+@SuppressLint("NewApi")
 fun View.showSoftKeyboard(delay: Long = 10L) {
     if (requestFocus()) {
         postDelayed({
@@ -50,6 +54,7 @@ fun View.showSoftKeyboard(delay: Long = 10L) {
     }
 }
 
+@SuppressLint("NewApi")
 fun Activity.showKeyboard() {
     val view = currentFocus
     if (view != null) {
@@ -58,6 +63,7 @@ fun Activity.showKeyboard() {
     }
 }
 
+@SuppressLint("NewApi")
 fun Activity.hideKeyboardNotEditText() {
     val view = currentFocus
     if (view != null && view !is android.widget.EditText) {

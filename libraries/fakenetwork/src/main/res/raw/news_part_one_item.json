@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "title news1",
+    "description": "description news1",
+    "author": {
+      "name": "author 1",
+      "surname": "author 1",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 1"
+      },
+      "avatarUrl": "https://sun9-45.userapi.com/impg/R9zsKXmYAv4AAj2nykVx-_nsG2sVOKBXa2V7Yw/dd-fblI75cw.jpg?size=200x0&quality=90&crop=621,797,586,586&sign=9b3bf5543d9d4102f314c00c9cb35c52&ava=1"
+    },
+    "pictures": [
+      {
+        "link": "https://sun9-5.userapi.com/c857332/v857332159/17b256/7-wYlitlOe0.jpg",
+        "text": "profileUrl 1 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://sun9-25.userapi.com/9kGVaUBLF9pbh2oCYODE8ERlyW_G26rSBcBD8g/sGQ3h5sD9lU.jpg",
+        "text": "profileUrl 2 1 text"
+      }
+    ],
+    "postDate": "1985-04-16T23:20:50.52Z"
+  }
+]

@@ -11,6 +11,7 @@ import ru.haliksar.flowapp.libraries.core.data.mapperUiData
 import java.util.*
 
 data class NewsUiData(
+    val id: Int,
     val title: String,
     val description: String,
     val author: AuthorUiData,
@@ -28,6 +29,7 @@ class NewsMapperUiData : NewsMapperUiDataT(), KoinComponent {
 
     override fun toUiData(entity: NewsEntity): NewsUiData =
         NewsUiData(
+            entity.id,
             entity.title,
             entity.description,
             authorMapper.toUiData(entity.author),
@@ -37,6 +39,7 @@ class NewsMapperUiData : NewsMapperUiDataT(), KoinComponent {
 
     override fun toEntity(uiData: NewsUiData): NewsEntity =
         NewsEntity(
+            uiData.id,
             uiData.title,
             uiData.description,
             authorMapper.toEntity(uiData.author),

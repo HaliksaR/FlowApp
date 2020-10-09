@@ -5,5 +5,5 @@ import ru.haliksar.flowapp.features.news.domain.entity.NewsEntity
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
 interface NewsRepository {
-    fun getNews(authKey: String): Flow<NetworkResponse<out List<NewsEntity>>>
+    fun getNews(pageStartIndex: Int): Flow<NetworkResponse<out List<NewsEntity>>>
 }

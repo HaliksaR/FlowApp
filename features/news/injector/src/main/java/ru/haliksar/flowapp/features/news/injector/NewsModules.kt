@@ -8,4 +8,8 @@ import ru.haliksar.flowapp.features.news.presentation.di.NewsDataMappersModule
 import ru.haliksar.flowapp.features.news.presentation.di.NewsViewModelModule
 
 val NewsModules =
-    listOf(NewsViewModelModule, NewsUseCaseModule, NewsDataMappersModule) + NewsDataModules
+    listOf(
+        NewsViewModelModule,
+        NewsUseCaseModule,
+        NewsDataMappersModule
+    ) + NewsDataModules

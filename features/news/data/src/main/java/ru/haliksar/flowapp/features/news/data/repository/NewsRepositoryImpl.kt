@@ -10,6 +10,6 @@ import ru.haliksar.flowapp.libraries.network.wrappers.safeCallFlow
 class NewsRepositoryImpl(private val dataSource: NewsDataSource) :
     NewsRepository {
 
-    override fun getNews(authKey: String): Flow<NetworkResponse<out List<NewsEntity>>> =
-        safeCallFlow { dataSource.getNews(authKey) }
+    override fun getNews(pageStartIndex: Int): Flow<NetworkResponse<out List<NewsEntity>>> =
+        safeCallFlow { dataSource.getNews(pageStartIndex) }
 }

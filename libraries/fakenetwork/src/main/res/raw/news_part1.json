@@ -1,0 +1,227 @@
+[
+  {
+    "id": 11,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 12,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 13,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 14,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 15,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 16,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 17,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 18,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  },
+  {
+    "id": 19,
+    "title": "title news4",
+    "description": "description news4",
+    "author": {
+      "name": "author 3",
+      "surname": "author 3",
+      "profileUrl": {
+        "link": "https://vk.com/haliksar",
+        "text": "profileUrl text 2"
+      },
+      "avatarUrl": "https://cdn.cnn.com/cnnnext/dam/assets/191203174105-edward-whitaker-1-large-169.jpg"
+    },
+    "pictures": [
+      {
+        "link": "https://deep-image.ai/static/media/slider-3-b.8cdacaf4.jpg",
+        "text": "profileUrl 2 1 text"
+      },
+      {
+        "link": "https://www.royalbcmuseum.bc.ca/sites/default/files/images/basic-pages/galleries/8952443104_808727392c_o.jpg",
+        "text": "profileUrl 2 2 text"
+      }
+    ],
+    "postDate": "2985-04-16T23:20:50.52Z"
+  }
+]

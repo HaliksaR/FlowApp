@@ -1,4 +1,4 @@
-package ru.haliksar.flowapp.libraries.core.presentation
+package ru.haliksar.flowapp.libraries.core.presentation.ext
 
 import android.app.Activity
 import android.content.Context
@@ -7,16 +7,34 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 
 fun Fragment.toast(message: String, length: Int = Toast.LENGTH_SHORT) =
-    toast(requireContext(), message, length)
+    toast(
+        requireContext(),
+        message,
+        length
+    )
 
 fun Fragment.toast(@StringRes messageId: Int, length: Int = Toast.LENGTH_SHORT) =
-    toast(requireContext(), null, messageId, length)
+    toast(
+        requireContext(),
+        null,
+        messageId,
+        length
+    )
 
 fun Activity.toast(message: String, length: Int = Toast.LENGTH_SHORT) =
-    toast(this, message, length)
+    toast(
+        this,
+        message,
+        length
+    )
 
 fun Activity.toast(@StringRes messageId: Int, length: Int = Toast.LENGTH_SHORT) =
-    toast(this, null, messageId, length)
+    toast(
+        this,
+        null,
+        messageId,
+        length
+    )
 
 fun toast(
     context: Context,

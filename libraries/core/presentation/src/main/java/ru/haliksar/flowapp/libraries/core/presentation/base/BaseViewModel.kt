@@ -1,4 +1,4 @@
-package ru.haliksar.flowapp.libraries.core.presentation
+package ru.haliksar.flowapp.libraries.core.presentation.base
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel

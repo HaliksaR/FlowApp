@@ -12,6 +12,7 @@ import ru.haliksar.flowapp.libraries.core.data.mapperDto
 import java.util.*
 
 data class NewsDto(
+    @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
     @SerializedName("author") val author: AuthorDto,
@@ -29,6 +30,7 @@ class NewsMapperDto : NewsMapperDtoT(), KoinComponent {
 
     override fun toDto(entity: NewsEntity): NewsDto =
         NewsDto(
+            entity.id,
             entity.title,
             entity.description,
             authorMapper.toDto(entity.author),
@@ -38,6 +40,7 @@ class NewsMapperDto : NewsMapperDtoT(), KoinComponent {
 
     override fun toEntity(dto: NewsDto): NewsEntity =
         NewsEntity(
+            dto.id,
             dto.title,
             dto.description,
             authorMapper.toEntity(dto.author),
