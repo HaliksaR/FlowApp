@@ -13,55 +13,37 @@ import kotlinx.android.synthetic.main.news_item.view.*
 import ru.haliksar.flowapp.features.news.presentation.R
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 
-class ProgressHolder(
-    private val view: ViewGroup,
-    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
-) : BaseViewHolder<NewsUiData?>(view, R.layout.item_loading) {
+class ProgressHolder<T : Any?>(
+    view: ViewGroup,
+) : BaseViewHolder<T>(view, R.layout.item_loading) {
 
-    override fun bindContent() {
-
-    }
-
-    override fun setListeners() {
-        clickListener?.invoke(itemView, data)
-    }
+    override fun bindContent() {}
+    override fun setListeners() {}
 }
 
-class ErrorHolder(
-    private val view: ViewGroup,
-    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
-) : BaseViewHolder<NewsUiData?>(view, R.layout.item_error) {
+class ErrorHolder<T : Any?>(
+    view: ViewGroup
+) : BaseViewHolder<T>(view, R.layout.item_error) {
 
-    override fun bindContent() {
-
-    }
-
-    override fun setListeners() {
-        clickListener?.invoke(itemView, data)
-    }
+    override fun bindContent() {}
+    override fun setListeners() {}
 }
 
-class FullHolder(
-    private val view: ViewGroup,
-    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
-) : BaseViewHolder<NewsUiData?>(view, R.layout.item_full) {
+class FullHolder<T : Any?>(
+    view: ViewGroup,
+) : BaseViewHolder<T>(view, R.layout.item_full) {
 
-    override fun bindContent() {
-
-    }
-
-    override fun setListeners() {
-        clickListener?.invoke(itemView, data)
-    }
+    override fun bindContent() {}
+    override fun setListeners() {}
 }
 
-class NewsViewHolder(
+class NewsViewHolder<T : Any?>(
     private val view: ViewGroup,
     private val clickListener: ((View, NewsUiData?) -> Unit)? = null
-) : BaseViewHolder<NewsUiData?>(view, R.layout.news_item) {
-
+) : BaseViewHolder<T>(view, R.layout.news_item) {
 
     override fun bindContent() {
+        val data = this.data as? NewsUiData
         itemView.title.text = data?.title
         itemView.description.text = data?.description
         itemView.name.text = data?.author?.name
@@ -83,12 +65,14 @@ class NewsViewHolder(
     }
 
     private fun setAvatar() {
+        val data = this.data as? NewsUiData
         itemView.avatar.load(data?.author?.avatarUrl) {
             transformations(CircleCropTransformation())
         }
     }
 
     private fun setPictures() {
+        val data = this.data as? NewsUiData
         data?.pictures?.forEach {
             itemView.pictures.addView(
                 ImageView(view.context).apply {
@@ -103,6 +87,7 @@ class NewsViewHolder(
     }
 
     override fun setListeners() {
+        val data = this.data as? NewsUiData
         clickListener?.invoke(itemView, data)
     }
 }

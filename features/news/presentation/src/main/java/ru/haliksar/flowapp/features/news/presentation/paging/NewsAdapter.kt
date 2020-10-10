@@ -1,10 +1,6 @@
 package ru.haliksar.flowapp.features.news.presentation.paging
 
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-
+/*
 class NewsAdapter(
     private val list: MutableList<NewsUiData>,
     private val clickListener: (View, NewsUiData?) -> Unit
@@ -22,4 +18,4 @@ class NewsAdapter(
         this.list.addAll(list)
         notifyDataSetChanged()
     }
-}
+}*/

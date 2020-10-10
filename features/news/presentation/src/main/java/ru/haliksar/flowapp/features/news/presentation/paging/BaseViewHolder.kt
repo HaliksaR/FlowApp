@@ -9,7 +9,7 @@ abstract class BaseViewHolder<T : Any?>(parent: ViewGroup, layoutId: Int) :
 
     protected var data: T? = null
 
-    open fun bind(data: T) {
+    open fun bind(data: T?) {
         this.data = data
         bindContent()
         setListeners()
