@@ -1,23 +1,25 @@
 package ru.haliksar.flowapp.features.news.presentation
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.news_fragment.*
-import kotlinx.android.synthetic.main.news_item.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
-import ru.haliksar.flowapp.features.news.presentation.paging.NewsAdapterDelegate
+import ru.haliksar.flowapp.features.news.presentation.paging.PaginationListener
+import ru.haliksar.flowapp.features.news.presentation.paging.PaginationListener.Companion.PAGE_START
+import ru.haliksar.flowapp.features.news.presentation.paging.PostRecyclerAdapter
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-import ru.haliksar.flowapp.libraries.paging.PagingAdapter
+import ru.haliksar.flowapp.libraries.paging.Paging
 import ru.haliksar.flowapp.navigation.GLOBAL_GRAPH
 import ru.haliksar.flowapp.navigation.navigate
+
 
 @KoinApiExtension
 class NewsFragment : Fragment() {
@@ -25,7 +27,7 @@ class NewsFragment : Fragment() {
     @ExperimentalCoroutinesApi
     private val viewModel by viewModel<NewsViewModel>()
 
-    @ExperimentalCoroutinesApi
+/*    @ExperimentalCoroutinesApi
     private val adapter by lazy {
         PagingAdapter(
             nextPageCallback = {
@@ -42,13 +44,22 @@ class NewsFragment : Fragment() {
                 }
             )
         )
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.news_fragment, container, false)
+
+    private var adapter: PostRecyclerAdapter? = null
+    private var currentPage: Int = PAGE_START
+    private var isLastPage = false
+    private val totalPage = 10
+    private var isLoading = false
+    private var isError = false
+    private var isFull = false
+    private var itemCount = 0
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,11 +76,58 @@ class NewsFragment : Fragment() {
             }
             true
         }
-        paging_view.init(adapter) {
-            viewModel.refreshNews()
+        swipeRefresh.setOnRefreshListener {
+            itemCount = 0
+            currentPage = PAGE_START
+            isLastPage = false
+            adapter?.clear()
+            viewModel.loadNews(currentPage)
         }
+        recyclerView.setHasFixedSize(true)
+        val layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = layoutManager
+        adapter = PostRecyclerAdapter(ArrayList())
+        recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(object : PaginationListener(layoutManager) {
+            override fun loadMoreItems() {
+                isError = false
+                isFull = false
+                isLoading = true
+                currentPage++
+                viewModel.loadNews(currentPage)
+            }
+
+            override val isLastPage: Boolean = this@NewsFragment.isLastPage
+            override var isLoading: Boolean = this@NewsFragment.isLoading
+            override var isError: Boolean = this@NewsFragment.isError
+            override var isFull: Boolean = this@NewsFragment.isFull
+        })
+
         viewModel.uiStateObserve {
-            paging_view.render(it)
+            when (it) {
+                is Paging.State.EmptyError -> {
+                    isError = true
+                    adapter?.addError()
+                }
+                is Paging.State.Data<*> -> {
+                    if (currentPage != PAGE_START) {
+                        adapter?.removeLoading()
+                    }
+                    adapter?.addItems(it.data as List<NewsUiData>)
+                    if (currentPage < totalPage) {
+                        adapter?.addLoading()
+                    } else {
+                        isLastPage = true
+                    }
+                    isLoading = false
+                }
+                is Paging.State.FullData<*> -> {
+                    isFull = true
+                    adapter?.addFull()
+                }
+            }
         }
+
+        viewModel.loadNews(0)
     }
 }

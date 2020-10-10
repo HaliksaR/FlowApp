@@ -32,11 +32,11 @@ internal fun post(context: Context, uri: Uri, response: Response.Builder): Respo
                         description = "",
                         res = R.raw.news_part1
                     ),
-                    "pageNumber=2" to FakeResponse(
+/*                    "pageNumber=2" to FakeResponse(
                         code = 404,
                         description = "",
                         res = null
-                    )
+                    )*/
                 )
             )
         }

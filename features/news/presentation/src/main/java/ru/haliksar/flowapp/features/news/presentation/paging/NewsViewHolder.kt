@@ -12,40 +12,84 @@ import coil.transform.CircleCropTransformation
 import kotlinx.android.synthetic.main.news_item.view.*
 import ru.haliksar.flowapp.features.news.presentation.R
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewHolder
+
+class ProgressHolder(
+    private val view: ViewGroup,
+    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
+) : BaseViewHolder<NewsUiData?>(view, R.layout.item_loading) {
+
+    override fun bindContent() {
+
+    }
+
+    override fun setListeners() {
+        clickListener?.invoke(itemView, data)
+    }
+}
+
+class ErrorHolder(
+    private val view: ViewGroup,
+    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
+) : BaseViewHolder<NewsUiData?>(view, R.layout.item_error) {
+
+    override fun bindContent() {
+
+    }
+
+    override fun setListeners() {
+        clickListener?.invoke(itemView, data)
+    }
+}
+
+class FullHolder(
+    private val view: ViewGroup,
+    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
+) : BaseViewHolder<NewsUiData?>(view, R.layout.item_full) {
+
+    override fun bindContent() {
+
+    }
+
+    override fun setListeners() {
+        clickListener?.invoke(itemView, data)
+    }
+}
 
 class NewsViewHolder(
     private val view: ViewGroup,
-    private val clickListener: (View, NewsUiData) -> Unit
-) : BaseViewHolder<NewsUiData>(view, R.layout.news_item) {
+    private val clickListener: ((View, NewsUiData?) -> Unit)? = null
+) : BaseViewHolder<NewsUiData?>(view, R.layout.news_item) {
+
 
     override fun bindContent() {
-        itemView.title.text = data.title
-        itemView.description.text = data.description
-        itemView.name.text = data.author.name
-        itemView.surname.text = data.author.surname
-        itemView.postDate.text = data.postDate.toString()
+        itemView.title.text = data?.title
+        itemView.description.text = data?.description
+        itemView.name.text = data?.author?.name
+        itemView.surname.text = data?.author?.surname
+        itemView.postDate.text = data?.postDate.toString()
 
-        val link = SpannableString(data.author.profileUrl.text)
-        link.setSpan(
-            URLSpan(data.author.profileUrl.link),
-            0,
-            data.author.profileUrl.text.length,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        itemView.profileUrl.text = link
+        data?.author?.profileUrl?.let {
+            val link = SpannableString(it.text)
+            link.setSpan(
+                URLSpan(it.link),
+                0,
+                it.text.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            itemView.profileUrl.text = link
+        }
         setAvatar()
         setPictures()
     }
 
     private fun setAvatar() {
-        itemView.avatar.load(data.author.avatarUrl) {
+        itemView.avatar.load(data?.author?.avatarUrl) {
             transformations(CircleCropTransformation())
         }
     }
 
     private fun setPictures() {
-        data.pictures?.forEach {
+        data?.pictures?.forEach {
             itemView.pictures.addView(
                 ImageView(view.context).apply {
                     scaleType = ImageView.ScaleType.FIT_CENTER
@@ -59,6 +103,6 @@ class NewsViewHolder(
     }
 
     override fun setListeners() {
-        clickListener(itemView, data)
+        clickListener?.invoke(itemView, data)
     }
 }

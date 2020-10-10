@@ -7,7 +7,7 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 
 class NewsAdapterDelegate(
-    private val clickListener: (View, NewsUiData) -> Unit
+    private val clickListener: (View, NewsUiData?) -> Unit
 ) : AdapterDelegate<MutableList<Any>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
