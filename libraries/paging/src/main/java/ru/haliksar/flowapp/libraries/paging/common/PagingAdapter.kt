@@ -1,27 +1,31 @@
-package ru.haliksar.flowapp.libraries.paging
+package ru.haliksar.flowapp.libraries.paging.common
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
-class PagingAdapter(
-    private val nextPageCallback: () -> Unit,
+open class PagingAdapter(
+    protected val nextPageCallback: () -> Unit,
     itemDiff: (old: Any, new: Any) -> Boolean,
     progressDelegate: AdapterDelegate<MutableList<Any>> = ProgressAdapterDelegate(),
-    vararg delegate: AdapterDelegate<MutableList<Any>>
+    delegate: AdapterDelegate<MutableList<Any>>
 ) : AsyncListDifferDelegationAdapter<Any>(DiffItemCallback(itemDiff)) {
 
-    private var isFull: Boolean = false
+    var fullData = false
 
     init {
         items = mutableListOf()
         delegatesManager.addDelegate(progressDelegate)
-        delegate.forEach { delegatesManager.addDelegate(it) }
+        delegatesManager.addDelegate(delegate)
     }
 
-    fun setData(list: List<*>, isFull: Boolean = false) {
-        this.isFull = isFull
-        items = list.toList()
+    open fun update(data: List<Any>, isPageProgress: Boolean) {
+        items = mutableListOf<Any>().apply {
+            addAll(data)
+            if (isPageProgress) {
+                add(ProgressItem)
+            }
+        }
     }
 
     override fun onBindViewHolder(
@@ -30,6 +34,9 @@ class PagingAdapter(
         payloads: MutableList<Any?>
     ) {
         super.onBindViewHolder(holder, position, payloads)
-        if (!isFull && position >= items.size - 10) nextPageCallback.invoke()
+        if (!fullData && position >= items.size - 10) {
+            nextPageCallback.invoke()
+        }
     }
 }
+

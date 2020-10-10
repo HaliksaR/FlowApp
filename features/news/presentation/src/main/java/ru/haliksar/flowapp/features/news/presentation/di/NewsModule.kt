@@ -17,10 +17,12 @@ val NewsViewModelModule = module {
 const val NEWS_MAPPER_UIDATA = "NEWS_MAPPER_UIDATA"
 const val AUTHOR_MAPPER_UIDATA = "AUTHOR_MAPPER_UIDATA"
 const val URL_MAPPER_UIDATA = "URL_MAPPER_UIDATA"
+const val QUOTES_MAPPER_UIDATA = "QUOTES_MAPPER_UIDATA"
 
 @OptIn(KoinApiExtension::class)
 val NewsDataMappersModule = module {
     factory<NewsMapperUiDataT>(named(NEWS_MAPPER_UIDATA)) { NewsMapperUiData() }
     factory<AuthorMapperUiDataT>(named(AUTHOR_MAPPER_UIDATA)) { AuthorMapperUiData() }
     factory<UrlMapperUiDataT>(named(URL_MAPPER_UIDATA)) { UrlMapperUiData() }
+    factory<QuotesMapperUiDataT>(named(QUOTES_MAPPER_UIDATA)) { QuotesMapperUiData() }
 }

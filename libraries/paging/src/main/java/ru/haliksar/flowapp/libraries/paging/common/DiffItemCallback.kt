@@ -1,4 +1,4 @@
-package ru.haliksar.flowapp.libraries.paging
+package ru.haliksar.flowapp.libraries.paging.common
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
@@ -15,5 +15,5 @@ class DiffItemCallback(
     override fun getChangePayload(oldItem: Any, newItem: Any) = Any()
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Any, newItem: Any) = oldItem == newItem
 }
