@@ -1,6 +1,5 @@
 package ru.haliksar.flowapp.features.news.data.api
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.POST
 import retrofit2.http.Query
 import ru.haliksar.flowapp.features.news.data.dto.QuotesDto
@@ -11,5 +10,8 @@ interface QuotesApi {
     }
 
     @POST(URL)
-    fun getQuotes(@Query("pageNumber") pageNumber: Int): Flow<List<QuotesDto>?>
+    suspend fun getQuotes(
+        @Query("page") page: Int,
+        @Query("limit") size: Int
+    ): List<QuotesDto>
 }

@@ -3,6 +3,8 @@ package ru.haliksar.flowapp.libraries.paging.mutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -12,6 +14,8 @@ import ru.haliksar.flowapp.libraries.paging.redux.SideEffect
 import ru.haliksar.flowapp.libraries.paging.redux.State
 
 @ExperimentalCoroutinesApi
+@ObsoleteCoroutinesApi
+@FlowPreview
 abstract class PagingMutableViewModel<T : Any> : ViewModel(), PagingMutableContract<T> {
 
     final override val paging: Store<T> = Store(viewModelScope)

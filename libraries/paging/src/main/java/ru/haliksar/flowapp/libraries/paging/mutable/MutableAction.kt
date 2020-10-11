@@ -2,7 +2,8 @@ package ru.haliksar.flowapp.libraries.paging.mutable
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import ru.haliksar.flowapp.libraries.paging.common.swap
@@ -208,8 +209,9 @@ private fun <T : Any> reducer(
 @ExperimentalCoroutinesApi
 class Store<T : Any>(scope: CoroutineScope) : CoroutineScope by scope {
     val render = MutableStateFlow<State>(State.Empty)
-    val sideEffects = Channel<SideEffect>()
+    val sideEffects = ConflatedBroadcastChannel<SideEffect>()
 
+    @FlowPreview
     fun proceed(action: ActionMutable) {
         val newState =
             reducer<T>(action, render.value) { sideEffect ->

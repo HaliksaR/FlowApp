@@ -1,5 +1,7 @@
 package ru.haliksar.flowapp.features.news.data.di
 
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -7,13 +9,13 @@ import ru.haliksar.flowapp.features.news.data.api.NewsApi
 import ru.haliksar.flowapp.features.news.data.api.QuotesApi
 import ru.haliksar.flowapp.features.news.data.datasource.NewsDataSource
 import ru.haliksar.flowapp.features.news.data.datasource.NewsDataSourceImpl
-import ru.haliksar.flowapp.features.news.data.datasource.QuotesDataSource
-import ru.haliksar.flowapp.features.news.data.datasource.QuotesDataSourceImpl
+import ru.haliksar.flowapp.features.news.data.datasource.QuotesPagingDataSourceImpl
 import ru.haliksar.flowapp.features.news.data.dto.*
 import ru.haliksar.flowapp.features.news.data.repository.NewsRepositoryImpl
 import ru.haliksar.flowapp.features.news.data.repository.QuotesRepositoryImpl
+import ru.haliksar.flowapp.features.news.domain.entity.QuotesEntity
 import ru.haliksar.flowapp.features.news.domain.repository.NewsRepository
-import ru.haliksar.flowapp.features.news.domain.repository.QuotesRepository
+import ru.haliksar.flowapp.features.news.domain.repository.QuotesPagingRepository
 import ru.haliksar.flowapp.libraries.network.createRetrofitService
 import ru.haliksar.flowapp.libraries.network.di.FAKE
 
@@ -38,12 +40,13 @@ internal val NewsDataMappersModule = module {
 @OptIn(KoinApiExtension::class)
 internal val NewsDataSourceModule = module {
     factory<NewsDataSource> { NewsDataSourceImpl(get()) }
-    factory<QuotesDataSource> { QuotesDataSourceImpl(get()) }
+    factory<PagingSource<Int, QuotesEntity>> { QuotesPagingDataSourceImpl(get()) }
 }
 
+@OptIn(KoinApiExtension::class)
 internal val NewsRepositoryModule = module {
     factory<NewsRepository> { NewsRepositoryImpl(get()) }
-    factory<QuotesRepository> { QuotesRepositoryImpl(get()) }
+    factory<QuotesPagingRepository<PagingData<QuotesEntity>>> { QuotesRepositoryImpl() }
 }
 
 val NewsDataModules = listOf(

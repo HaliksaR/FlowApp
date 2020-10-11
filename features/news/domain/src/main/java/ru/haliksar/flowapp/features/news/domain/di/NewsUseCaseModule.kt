@@ -12,5 +12,5 @@ const val QUOTES_USECASE = "QUOTES_USECASE"
 
 val NewsUseCaseModule = module {
     factory<NewsUseCaseT>(named(NEWS_USECASE)) { NewsUseCase(get()) }
-    factory<QuotesUseCaseT>(named(QUOTES_USECASE)) { QuotesUseCase(get()) }
+    factory<QuotesUseCaseT<Any, Any>>(named(QUOTES_USECASE)) { QuotesUseCase<Any, Any>(get()) }
 }

@@ -42,6 +42,7 @@ object Modules {
         object Network {
             override fun toString() = "$Libraries:network"
             val wrappers = "$Network:wrappers"
+            val pagingwrappers = "$Network:pagingwrappers"
         }
 
         val fakeNetwork = "$Libraries:fakenetwork"

@@ -1,36 +1,32 @@
-package ru.haliksar.flowapp.features.news.presentation.paging
+package ru.haliksar.flowapp.features.news.presentation.paging3
 
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.URLSpan
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import kotlinx.android.synthetic.main.quotes_item.view.*
 import ru.haliksar.flowapp.features.news.presentation.R
 import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesUiData
 import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewHolder
 
-class QuotesAdapterDelegate(
+class QuotesAdapter(
     private val clickListener: (View, QuotesUiData) -> Unit
-) : AdapterDelegate<MutableList<Any>>() {
+) : PagingDataAdapter<QuotesUiData, QuotesAdapter.QuotesViewHolder>(
+    object : DiffUtil.ItemCallback<QuotesUiData>() {
+        override fun areItemsTheSame(oldItem: QuotesUiData, newItem: QuotesUiData): Boolean =
+            oldItem == newItem
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        QuotesViewHolder(parent, clickListener)
+        override fun areContentsTheSame(oldItem: QuotesUiData, newItem: QuotesUiData): Boolean =
+            oldItem == newItem
+    }
+) {
 
-    override fun isForViewType(items: MutableList<Any>, position: Int): Boolean = true
-
-    override fun onBindViewHolder(
-        items: MutableList<Any>,
-        position: Int,
-        holder: RecyclerView.ViewHolder,
-        payloads: MutableList<Any>
-    ) = (holder as QuotesViewHolder).bind(items[position] as QuotesUiData)
-
-    private inner class QuotesViewHolder(
+    inner class QuotesViewHolder(
         private val view: ViewGroup,
         private val clickListener: ((View, QuotesUiData) -> Unit)? = null
     ) : BaseViewHolder<QuotesUiData>(view, R.layout.quotes_item) {
@@ -63,5 +59,12 @@ class QuotesAdapterDelegate(
             clickListener?.invoke(itemView, data)
         }
     }
+
+    override fun onBindViewHolder(holder: QuotesViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuotesViewHolder =
+        QuotesViewHolder(parent, clickListener)
 }
 

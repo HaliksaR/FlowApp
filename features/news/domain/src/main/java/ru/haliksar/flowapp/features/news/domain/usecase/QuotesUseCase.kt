@@ -1,15 +1,15 @@
 package ru.haliksar.flowapp.features.news.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import ru.haliksar.flowapp.features.news.domain.entity.QuotesEntity
-import ru.haliksar.flowapp.features.news.domain.repository.QuotesRepository
+import ru.haliksar.flowapp.features.news.domain.repository.QuotesPagingRepository
 import ru.haliksar.flowapp.libraries.core.domain.UseCase
-import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 
-typealias QuotesUseCaseT = UseCase<Flow<NetworkResponse<out List<QuotesEntity>>>, Int>
+typealias QuotesUseCaseT<T, P> = UseCase<Flow<T>, P>
 
-class QuotesUseCase(private val repository: QuotesRepository) : QuotesUseCaseT {
+class QuotesUseCase<T : Any, P : Any>(
+    private val repository: QuotesPagingRepository<T>
+) : QuotesUseCaseT<T, P> {
 
-    override operator fun invoke(param: Int): Flow<NetworkResponse<out List<QuotesEntity>>> =
-        repository.getQuotes(param)
+    override operator fun invoke(param: P): Flow<T> =
+        repository.getQuotes()
 }

@@ -23,6 +23,7 @@ dependencies {
     impl(Libs.Androidx.Swiperefreshlayout)
     impl(Libs.Adapterdelegates4)
     impl(Libs.Coil)
+    impl(Libs.Androidx.Paging.runtime)
     fragment()
     navigation()
     impl(Libs.Material)

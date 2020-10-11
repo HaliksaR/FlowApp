@@ -13,8 +13,18 @@
             android:layout_height="?attr/actionBarSize" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ru.haliksar.flowapp.libraries.paging.mutable.PagingViewMutable
-        android:id="@+id/paging_view"
+    <!--    <ru.haliksar.flowapp.libraries.paging.mutable.PagingViewMutable
+            android:id="@+id/paging_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_paging3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

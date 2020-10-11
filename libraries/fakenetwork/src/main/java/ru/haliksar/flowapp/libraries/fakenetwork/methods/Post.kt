@@ -45,15 +45,15 @@ internal fun post(context: Context, uri: Uri, response: Response.Builder): Respo
                 key = uri.query,
                 defaultResponse = FakeResponse(description = "", res = R.raw.part_empty),
                 queryByJson = mapOf<String?, FakeResponse>(
-                    "pageNumber=1" to FakeResponse(
+                    "page=1&limit=60" to FakeResponse(
                         description = "",
                         res = R.raw.quotes_part0
                     ),
-                    "pageNumber=2" to FakeResponse(
+                    "page=2&limit=20" to FakeResponse(
                         description = "",
                         res = R.raw.quotes_part1
                     ),
-                    "pageNumber=3" to FakeResponse(
+                    "page=3&limit=20" to FakeResponse(
                         code = 404,
                         description = "",
                         res = null

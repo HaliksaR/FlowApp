@@ -7,6 +7,7 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import java.util.*
+import kotlin.math.pow
 
 /*
 Thanks Moshi!
@@ -136,12 +137,10 @@ internal object Iso8601Utils {
                                 offset + 1
                             ) // assume at least one digit
                             val parseEndOffset =
-                                Math.min(endOffset, offset + 3) // parse up to 3 digits
+                                endOffset.coerceAtMost(offset + 3) // parse up to 3 digits
                             val fraction = parseInt(date, offset, parseEndOffset)
-                            milliseconds = (Math.pow(
-                                10.0,
-                                3 - (parseEndOffset - offset).toDouble()
-                            ) * fraction).toInt()
+                            milliseconds =
+                                (10.0.pow(3 - (parseEndOffset - offset).toDouble()) * fraction).toInt()
                             offset = endOffset
                         }
                     }

@@ -1,3 +1,4 @@
+include(":libraries:network:pagingwrappers")
 include(
     ":app",
     ":app:injector",
@@ -17,7 +18,8 @@ include(
 
 include(
     ":libraries:network",
-    ":libraries:network:wrappers"
+    ":libraries:network:wrappers",
+    ":libraries:network:pagingwrappers"
 )
 
 include(
