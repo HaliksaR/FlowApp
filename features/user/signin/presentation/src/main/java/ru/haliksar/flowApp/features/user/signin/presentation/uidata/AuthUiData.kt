@@ -3,10 +3,7 @@ package ru.haliksar.flowApp.features.user.signin.presentation.uidata
 import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
 import ru.haliksar.flowapp.libraries.core.data.mapper.MapperUiData
 
-data class AuthUiData(
-    val accessToken: String
-)
-
+data class AuthUiData(val accessToken: String)
 
 typealias AuthMapperUiDataT = MapperUiData<AuthEntity, AuthUiData>
 

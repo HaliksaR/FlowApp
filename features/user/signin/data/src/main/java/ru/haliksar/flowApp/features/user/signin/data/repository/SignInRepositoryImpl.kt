@@ -5,13 +5,10 @@ import ru.haliksar.flowApp.features.user.signin.data.datasource.SignInDataSource
 import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
 import ru.haliksar.flowApp.features.user.signin.domain.entity.SignInEntity
 import ru.haliksar.flowApp.features.user.signin.domain.repository.SignInRepository
-import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
-import ru.haliksar.flowapp.libraries.network.wrappers.safeCallFlow
+import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
 
-class SignInRepositoryImpl(
-    private val dataSource: SignInDataSource
-) : SignInRepository {
+class SignInRepositoryImpl(private val dataSource: SignInDataSource) : SignInRepository {
 
-    override fun signIn(data: SignInEntity): Flow<NetworkResponse<out AuthEntity>> =
-        safeCallFlow { dataSource.signIn(data = data) }
+    override fun signIn(data: SignInEntity): Flow<NetResponse<AuthEntity>> =
+        dataSource.signIn(data = data)
 }

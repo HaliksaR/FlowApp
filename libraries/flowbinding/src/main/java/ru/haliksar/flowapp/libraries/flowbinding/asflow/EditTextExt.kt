@@ -15,13 +15,8 @@ import kotlinx.coroutines.flow.onEach
 inline fun EditText.asFlow(
     crossinline take: (CharSequence) -> Unit
 ) = callbackFlow {
-    awaitClose {
-        removeTextChangedListener(
-            doAfterTextChanged {
-                it?.let { offer(it) }
-            }
-        )
-    }
+    val watcher = doAfterTextChanged { offer(it.toString()) }
+    awaitClose { removeTextChangedListener(watcher) }
 }.onEach { take(it) }
 
 @ExperimentalCoroutinesApi

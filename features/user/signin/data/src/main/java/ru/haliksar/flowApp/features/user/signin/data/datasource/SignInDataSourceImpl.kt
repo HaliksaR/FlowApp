@@ -13,6 +13,8 @@ import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
 import ru.haliksar.flowApp.features.user.signin.domain.entity.SignInEntity
 import ru.haliksar.flowapp.libraries.core.data.mapper.mapperDto
 import ru.haliksar.flowapp.libraries.core.data.mapper.toEntity
+import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
+import ru.haliksar.flowapp.libraries.network.wrappers.safeCallFlow
 
 @KoinApiExtension
 class SignInDataSourceImpl(private val api: SignInApi) : SignInDataSource, KoinComponent {
@@ -24,6 +26,7 @@ class SignInDataSourceImpl(private val api: SignInApi) : SignInDataSource, KoinC
         named(AUTH_MAPPER_DTO)
     )
 
-    override fun signIn(data: SignInEntity): Flow<AuthEntity> =
-        api.signIn(mapperSignIn.toDto(data)).toEntity(mapperAuth)
+    override fun signIn(data: SignInEntity): Flow<NetResponse<AuthEntity>> =
+        safeCallFlow { api.signIn(mapperSignIn.toDto(data)).toEntity(mapperAuth) }
+
 }

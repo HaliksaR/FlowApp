@@ -14,7 +14,6 @@ import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.core.presentation.ext.toast
 import ru.haliksar.flowapp.libraries.flowbinding.clicks.clicksFlow
-import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlow
 import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlowS
 import ru.haliksar.flowapp.libraries.flowbinding.twoway.twoWayFlow
 
@@ -34,11 +33,11 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
-            textView.oneWayFlow(lifecycleScope, loginFlow)
-            edit_text_login.oneWayFlowS(lifecycleScope, loginFlow) {
-                setText(it)
+            textView.oneWayFlowS(lifecycleScope, signInData.login) {
+                text = it
             }
-            edit_text_password.twoWayFlow(lifecycleScope, passwordFlow)
+            edit_text_login.twoWayFlow(lifecycleScope, signInData.login)
+            edit_text_password.twoWayFlow(lifecycleScope, signInData.password)
             button_sign_in.clicksFlow(lifecycleScope, true) {
                 startSignIn()
             }
