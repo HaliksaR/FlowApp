@@ -7,5 +7,5 @@ import ru.haliksar.flowapp.app.navigation.R
 const val GLOBAL_GRAPH = "GLOBAL_GRAPH"
 
 val NavigationModule = module {
-    single(named(GLOBAL_GRAPH)) { R.id.host_global }
+    single(named(GLOBAL_GRAPH)) { R.id.fragmentNavHost }
 }

@@ -2,7 +2,7 @@ package ru.haliksar.flowApp.features.user.signin.data.dto
 
 import com.google.gson.annotations.SerializedName
 import ru.haliksar.flowApp.features.user.signin.domain.entity.SignInEntity
-import ru.haliksar.flowapp.libraries.core.data.MapperDto
+import ru.haliksar.flowapp.libraries.core.data.mapper.MapperDto
 
 data class SignInDto(
     @SerializedName("login") val login: String,

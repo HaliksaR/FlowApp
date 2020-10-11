@@ -4,11 +4,15 @@ import com.google.gson.annotations.SerializedName
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
-import ru.haliksar.flowapp.features.news.data.di.AUTHOR_MAPPER_DTO
-import ru.haliksar.flowapp.features.news.data.di.URL_MAPPER_DTO
 import ru.haliksar.flowapp.features.news.domain.entity.NewsEntity
-import ru.haliksar.flowapp.libraries.core.data.MapperDto
-import ru.haliksar.flowapp.libraries.core.data.mapperDto
+import ru.haliksar.flowapp.libraries.core.data.di.AUTHOR_MAPPER_DTO
+import ru.haliksar.flowapp.libraries.core.data.di.URL_MAPPER_DTO
+import ru.haliksar.flowapp.libraries.core.data.dto.AuthorDto
+import ru.haliksar.flowapp.libraries.core.data.dto.AuthorMapperDtoT
+import ru.haliksar.flowapp.libraries.core.data.dto.UrlDto
+import ru.haliksar.flowapp.libraries.core.data.dto.UrlMapperDtoT
+import ru.haliksar.flowapp.libraries.core.data.mapper.MapperDto
+import ru.haliksar.flowapp.libraries.core.data.mapper.mapperDto
 import java.util.*
 
 data class NewsDto(

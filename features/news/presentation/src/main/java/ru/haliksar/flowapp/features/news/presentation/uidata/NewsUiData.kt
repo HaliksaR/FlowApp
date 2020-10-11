@@ -4,10 +4,14 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.domain.entity.NewsEntity
-import ru.haliksar.flowapp.features.news.presentation.di.AUTHOR_MAPPER_UIDATA
-import ru.haliksar.flowapp.features.news.presentation.di.URL_MAPPER_UIDATA
-import ru.haliksar.flowapp.libraries.core.data.MapperUiData
-import ru.haliksar.flowapp.libraries.core.data.mapperUiData
+import ru.haliksar.flowapp.libraries.core.data.mapper.MapperUiData
+import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
+import ru.haliksar.flowapp.libraries.core.presentation.di.AUTHOR_MAPPER_UIDATA
+import ru.haliksar.flowapp.libraries.core.presentation.di.URL_MAPPER_UIDATA
+import ru.haliksar.flowapp.libraries.core.presentation.uidata.AuthorMapperUiDataT
+import ru.haliksar.flowapp.libraries.core.presentation.uidata.AuthorUiData
+import ru.haliksar.flowapp.libraries.core.presentation.uidata.UrlMapperUiDataT
+import ru.haliksar.flowapp.libraries.core.presentation.uidata.UrlUiData
 import java.util.*
 
 data class NewsUiData(
@@ -24,8 +28,10 @@ typealias NewsMapperUiDataT = MapperUiData<NewsEntity, NewsUiData>
 @KoinApiExtension
 class NewsMapperUiData : NewsMapperUiDataT(), KoinComponent {
 
-    private val authorMapper by mapperUiData<AuthorMapperUiDataT>(named(AUTHOR_MAPPER_UIDATA))
-    private val urlMapper by mapperUiData<UrlMapperUiDataT>(named(URL_MAPPER_UIDATA))
+    private val authorMapper
+            by mapperUiData<AuthorMapperUiDataT>(named(AUTHOR_MAPPER_UIDATA))
+    private val urlMapper
+            by mapperUiData<UrlMapperUiDataT>(named(URL_MAPPER_UIDATA))
 
     override fun toUiData(entity: NewsEntity): NewsUiData =
         NewsUiData(
