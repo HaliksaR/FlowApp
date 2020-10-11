@@ -25,12 +25,7 @@ allprojects {
     }
 }
 
-subProjects(
-    Modules.Libraries,
-    Modules.Features,
-    Modules.Features.User,
-    Modules.Features.User.SignIn
-) {
+subProjects {
     project.tasks.withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"

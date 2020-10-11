@@ -23,7 +23,7 @@ import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.error
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.loading
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
-import ru.haliksar.flowapp.libraries.core.data.mapperUiData
+import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
 import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewModel
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
@@ -36,9 +36,11 @@ class SignInViewModel : BaseViewModel<UiState>() {
 
     private val useCase by useCase<SignInUseCaseT>(named(SIGN_IN_USECASE))
 
-    private val signInMapper by mapperUiData<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA))
+    private val signInMapper
+            by mapperUiData<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA))
 
-    private val authMapper by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
+    private val authMapper
+            by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
 
     val loginFlow = MutableStateFlow("")
     val passwordFlow = MutableStateFlow("")

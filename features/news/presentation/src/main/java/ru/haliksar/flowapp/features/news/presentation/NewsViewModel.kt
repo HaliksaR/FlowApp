@@ -1,28 +1,21 @@
 package ru.haliksar.flowapp.features.news.presentation
 
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import androidx.paging.map
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.domain.di.NEWS_USECASE
-import ru.haliksar.flowapp.features.news.domain.di.QUOTES_USECASE
-import ru.haliksar.flowapp.features.news.domain.entity.QuotesEntity
 import ru.haliksar.flowapp.features.news.domain.usecase.NewsUseCaseT
-import ru.haliksar.flowapp.features.news.domain.usecase.QuotesUseCaseT
 import ru.haliksar.flowapp.features.news.presentation.di.NEWS_MAPPER_UIDATA
-import ru.haliksar.flowapp.features.news.presentation.di.QUOTES_MAPPER_UIDATA
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsMapperUiDataT
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesMapperUiDataT
-import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesUiData
-import ru.haliksar.flowapp.libraries.core.data.mapperUiData
+import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkException
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
@@ -36,14 +29,8 @@ import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableViewModel
 class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
 
     private val newsUseCase by useCase<NewsUseCaseT>(named(NEWS_USECASE))
-    private val quotesUseCase by useCase<QuotesUseCaseT<PagingData<QuotesEntity>, Unit>>(
-        named(
-            QUOTES_USECASE
-        )
-    )
 
     private val mapperNews by mapperUiData<NewsMapperUiDataT>(named(NEWS_MAPPER_UIDATA))
-    private val mapperQuotes by mapperUiData<QuotesMapperUiDataT>(named(QUOTES_MAPPER_UIDATA))
 
     private val errors = MutableStateFlow<NetworkException?>(null)
 
@@ -52,13 +39,6 @@ class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
             action(it)
         }.launchIn(viewModelScope)
     }
-
-    fun fetchQuotes(): Flow<PagingData<QuotesUiData>> =
-        quotesUseCase(Unit).map {
-            it.map {
-                mapperQuotes.toUiData(it)
-            }
-        }.cachedIn(viewModelScope)
 
     override fun loadNewPage(page: Int) {
         newsUseCase(page).onEach { news ->

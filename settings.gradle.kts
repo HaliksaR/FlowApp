@@ -1,4 +1,3 @@
-include(":libraries:network:pagingwrappers")
 include(
     ":app",
     ":app:injector",
@@ -10,10 +9,10 @@ include(":libraries:flowbinding")
 include(":libraries:paging")
 
 include(
-    ":libraries:core",
     ":libraries:core:presentation",
     ":libraries:core:data",
-    ":libraries:core:domain"
+    ":libraries:core:domain",
+    ":libraries:core:injector"
 )
 
 include(
@@ -34,4 +33,11 @@ include(
     ":features:news:data",
     ":features:news:domain",
     ":features:news:presentation"
+)
+
+include(
+    ":features:quotes:injector",
+    ":features:quotes:domain",
+    ":features:quotes:data",
+    ":features:quotes:presentation"
 )

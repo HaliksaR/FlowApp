@@ -1,7 +1,7 @@
 package ru.haliksar.flowApp.features.user.signin.presentation.uidata
 
 import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
-import ru.haliksar.flowapp.libraries.core.data.MapperUiData
+import ru.haliksar.flowapp.libraries.core.data.mapper.MapperUiData
 
 data class AuthUiData(
     val accessToken: String

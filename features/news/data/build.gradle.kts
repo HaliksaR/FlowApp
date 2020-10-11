@@ -7,6 +7,7 @@ plugins {
 dependencies {
     modules(
         Modules.Libraries.Core.data,
+        Modules.Libraries.Core.domain,
         Modules.Libraries.Network,
         Modules.Libraries.Network.wrappers,
         Modules.Libraries.Network.pagingwrappers,

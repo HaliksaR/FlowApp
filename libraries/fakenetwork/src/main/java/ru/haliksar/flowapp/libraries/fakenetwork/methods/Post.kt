@@ -5,7 +5,7 @@ import android.net.Uri
 import okhttp3.Response
 import ru.haliksar.flowApp.features.user.signin.data.api.SignInApi
 import ru.haliksar.flowapp.features.news.data.api.NewsApi
-import ru.haliksar.flowapp.features.news.data.api.QuotesApi
+import ru.haliksar.flowapp.features.quotes.data.api.QuotesApi
 import ru.haliksar.flowapp.libraries.fakenetwork.R
 import ru.haliksar.flowapp.libraries.fakenetwork.ext.*
 

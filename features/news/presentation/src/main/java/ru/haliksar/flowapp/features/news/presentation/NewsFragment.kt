@@ -6,24 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.news_fragment.*
 import kotlinx.android.synthetic.main.news_item.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.presentation.paging.NewsAdapterDelegate
-import ru.haliksar.flowapp.features.news.presentation.paging3.QuotesAdapter
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesUiData
+import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableAdapter
 import ru.haliksar.flowapp.navigation.GLOBAL_GRAPH
 import ru.haliksar.flowapp.navigation.navigate
@@ -45,8 +39,6 @@ class NewsFragment : Fragment() {
             itemDiff = { oldItem, newItem ->
                 if (oldItem is NewsUiData && newItem is NewsUiData) {
                     oldItem.id == newItem.id
-                } else if (oldItem is QuotesUiData && newItem is QuotesUiData) {
-                    oldItem.quote == newItem.quote && oldItem.author == newItem.author
                 } else {
                     false
                 }
@@ -55,12 +47,6 @@ class NewsFragment : Fragment() {
                 view.profileUrl.movementMethod = LinkMovementMethod.getInstance()
             },
         )
-    }
-
-    private val paging3Adapter by lazy {
-        QuotesAdapter { view, _ ->
-            view.profileUrl.movementMethod = LinkMovementMethod.getInstance()
-        }
     }
 
     override fun onCreateView(
@@ -83,7 +69,7 @@ class NewsFragment : Fragment() {
             }
             true
         }
-/*        paging_view.adapter = adapter
+        paging_view.adapter = adapter
         paging_view.refreshCallback = viewModel::refresh
         paging_view.itemMoved = viewModel::onMove
         paging_view.itemRemoved = viewModel::onRemove
@@ -92,15 +78,6 @@ class NewsFragment : Fragment() {
         }
         viewModel.observeErrors {
             it?.let { snack(it.message.toString()) }
-        }*/
-        rv_paging3.layoutManager = LinearLayoutManager(requireContext())
-        rv_paging3.adapter = paging3Adapter
-        swipeToRefresh.setOnRefreshListener {
-            paging3Adapter.refresh()
-            swipeToRefresh.isRefreshing = false
         }
-        viewModel.fetchQuotes().distinctUntilChanged().onEach {
-            paging3Adapter.submitData(lifecycle, it)
-        }.launchIn(lifecycleScope)
     }
 }

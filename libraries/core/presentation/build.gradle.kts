@@ -5,6 +5,10 @@ plugins {
 }
 
 dependencies {
+    modules(
+        Modules.Libraries.Core.domain,
+        Modules.Libraries.Core.data
+    )
     impl(Libs.Androidx.Lifecycle.lifecycleViewModel)
     impl(Libs.Androidx.Lifecycle.livedataKtx)
     impl(Libs.Androidx.Lifecycle.runtimeKtx)

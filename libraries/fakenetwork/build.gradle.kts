@@ -9,7 +9,8 @@ dependencies {
         Modules.Libraries.Network,
         Modules.Libraries.Network.wrappers,
         Modules.Features.User.SignIn.data,
-        Modules.Features.News.data
+        Modules.Features.News.data,
+        Modules.Features.Quotes.data
     )
     retrofit()
     gsonRetrofit()
