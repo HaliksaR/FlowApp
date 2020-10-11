@@ -16,13 +16,9 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
-import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.quotes.presentation.paging3.QuotesAdapter
-import ru.haliksar.flowapp.navigation.GLOBAL_GRAPH
-import ru.haliksar.flowapp.navigation.navigate
 
 
 @ObsoleteCoroutinesApi
@@ -47,18 +43,6 @@ class QuotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.inflateMenu(R.menu.toolbar_menu)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_sign_in -> {
-                    navigate(
-                        R.id.action_newsFragment_to_signInFragment,
-                        hostId = get(named(GLOBAL_GRAPH))
-                    )
-                }
-            }
-            true
-        }
         rv_paging3.layoutManager = LinearLayoutManager(requireContext())
         rv_paging3.adapter = paging3Adapter
         swipeToRefresh.setOnRefreshListener {

@@ -11,16 +11,12 @@ import kotlinx.android.synthetic.main.news_item.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
-import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
-import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.presentation.paging.NewsAdapterDelegate
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableAdapter
-import ru.haliksar.flowapp.navigation.GLOBAL_GRAPH
-import ru.haliksar.flowapp.navigation.navigate
 
 
 @ObsoleteCoroutinesApi
@@ -57,24 +53,12 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.inflateMenu(R.menu.toolbar_menu)
-        toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_sign_in -> {
-                    navigate(
-                        R.id.action_newsFragment_to_signInFragment,
-                        hostId = get(named(GLOBAL_GRAPH))
-                    )
-                }
-            }
-            true
-        }
         paging_view.adapter = adapter
         paging_view.refreshCallback = viewModel::refresh
         paging_view.itemMoved = viewModel::onMove
         paging_view.itemRemoved = viewModel::onRemove
         viewModel.pagingStateObserve {
-            paging_view.render(it)
+            paging_view?.render(it)
         }
         viewModel.observeErrors {
             it?.let { snack(it.message.toString()) }

@@ -6,8 +6,11 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.App.injector)
-    modules(Modules.App.navigation)
+    modules(
+        Modules.App.injector,
+        Modules.App.navigation
+    )
+    navigation()
     impl(Libs.Androidx.Core.ktx)
     impl(Libs.Androidx.Appcompat)
     koin()
