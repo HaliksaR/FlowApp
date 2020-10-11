@@ -10,5 +10,7 @@ dependencies {
     impl(Libs.Androidx.Recyclerview)
     impl(Libs.Androidx.Swiperefreshlayout)
     impl(Libs.Androidx.Coordinatorlayout)
+    impl(Libs.Material)
+    impl(Libs.Androidx.Lifecycle.lifecycleViewModel)
     coroutines()
 }

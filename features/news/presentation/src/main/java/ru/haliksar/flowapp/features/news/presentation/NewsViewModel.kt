@@ -2,74 +2,87 @@ package ru.haliksar.flowapp.features.news.presentation
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
+import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.domain.di.NEWS_USECASE
+import ru.haliksar.flowapp.features.news.domain.di.QUOTES_USECASE
 import ru.haliksar.flowapp.features.news.domain.usecase.NewsUseCaseT
+import ru.haliksar.flowapp.features.news.domain.usecase.QuotesUseCaseT
 import ru.haliksar.flowapp.features.news.presentation.di.NEWS_MAPPER_UIDATA
+import ru.haliksar.flowapp.features.news.presentation.di.QUOTES_MAPPER_UIDATA
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsMapperUiDataT
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
+import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesMapperUiDataT
 import ru.haliksar.flowapp.libraries.core.data.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
-import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewModel
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkException
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
-import ru.haliksar.flowapp.libraries.paging.Paging
+import ru.haliksar.flowapp.libraries.paging.mutable.ActionMutable
+import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableViewModel
 
 @KoinApiExtension
 @ExperimentalCoroutinesApi
-class NewsViewModel : BaseViewModel<Paging.State>() {
+class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
 
-    private val paging = Paging.Store<NewsUiData>()
+    private val newsUseCase by useCase<NewsUseCaseT>(named(NEWS_USECASE))
+    private val quotesUseCase by useCase<QuotesUseCaseT>(named(QUOTES_USECASE))
 
-    override var uiState = paging.flowRender
+    private val mapperNews by mapperUiData<NewsMapperUiDataT>(named(NEWS_MAPPER_UIDATA))
+    private val mapperQuotes by mapperUiData<QuotesMapperUiDataT>(named(QUOTES_MAPPER_UIDATA))
 
-    private val useCase by useCase<NewsUseCaseT>(named(NEWS_USECASE))
+    private val errors = MutableStateFlow<NetworkException?>(null)
 
-    private val mapperUiData by mapperUiData<NewsMapperUiDataT>(named(NEWS_MAPPER_UIDATA))
-
-    val errors = MutableStateFlow<NetworkException?>(null)
-
-    init {
-        setSideEffects()
-        refreshNews()
-    }
-
-    private fun setSideEffects() {
-        viewModelScope.launch {
-            paging.sideEffects.consumeEach { effect ->
-                when (effect) {
-                    is Paging.SideEffect.LoadPage -> {
-                        loadNews(effect.currentPage)
-                    }
-                    is Paging.SideEffect.ErrorEvent -> {
-                        errors.value = effect.error as NetworkException
-                    }
-                }
-            }
-        }
-    }
-
-    private fun loadNews(page: Int) {
-        useCase(page).onEach { response ->
-            when (response) {
-                is NetworkResponse.Success -> {
-                    val data = response.data.map { mapperUiData.toUiData(it) }
-                    paging.proceed(Paging.Action.NewPage(page, data))
-                }
-                is NetworkResponse.Error -> {
-                    paging.proceed(Paging.Action.PageError(response.exception))
-                }
-            }
+    fun observeErrors(action: (NetworkException?) -> Unit) {
+        errors.onEach {
+            action(it)
         }.launchIn(viewModelScope)
     }
 
-    fun loadMoreNews() = paging.proceed(Paging.Action.LoadMore)
+    override fun loadNewPage(page: Int) {
+        newsUseCase(page).combine(quotesUseCase(page)) { news, quotes ->
+            when (news) {
+                is NetworkResponse.Success -> {
+                    paging.proceed(
+                        ActionMutable.NewPage(
+                            pageNumber = page + 1,
+                            items = news.data.map { mapperNews.toUiData(it) }
+                        )
+                    )
+                }
+                is NetworkResponse.Error -> {
+                    paging.proceed(ActionMutable.PageError(news.exception))
+                }
+            }
+/*            when (quotes) {
+                is NetworkResponse.Success -> {
+                    paging.proceed(
+                        ActionMutable.NewPage(
+                            pageNumber = page + 1,
+                            items = quotes.data.map { mapperQuotes.toUiData(it) }
+                        )
+                    )
+                }
+                is NetworkResponse.Error -> {
+                    paging.proceed(ActionMutable.PageError(quotes.exception))
+                }
+            }*/
+        }.launchIn(viewModelScope)
+    }
 
-    fun refreshNews() = paging.proceed(Paging.Action.Refresh)
+    override fun errorEvent(error: Exception) {
+        errors.value = error as? NetworkException
+    }
+
+    override fun onMove(from: Int, to: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onRemove(index: Int) {
+        TODO("Not yet implemented")
+    }
 }

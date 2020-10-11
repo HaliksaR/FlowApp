@@ -15,32 +15,36 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.news.presentation.paging.NewsAdapterDelegate
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
-import ru.haliksar.flowapp.libraries.paging.PagingAdapter
+import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesUiData
+import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
+import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableAdapter
 import ru.haliksar.flowapp.navigation.GLOBAL_GRAPH
 import ru.haliksar.flowapp.navigation.navigate
 
+
+@ExperimentalCoroutinesApi
 @KoinApiExtension
 class NewsFragment : Fragment() {
 
-    @ExperimentalCoroutinesApi
     private val viewModel by viewModel<NewsViewModel>()
 
-    @ExperimentalCoroutinesApi
     private val adapter by lazy {
-        PagingAdapter(
+        PagingMutableAdapter(
             nextPageCallback = {
-                viewModel.loadMoreNews()
+                viewModel.loadMore()
             },
             itemDiff = { oldItem, newItem ->
-                if (oldItem is NewsUiData && newItem is NewsUiData)
+                if (oldItem is NewsUiData && newItem is NewsUiData) {
                     oldItem.id == newItem.id
-                else false
-            },
-            delegate = *arrayOf(
-                NewsAdapterDelegate { view, item ->
-                    view.profileUrl.movementMethod = LinkMovementMethod.getInstance()
+                } else if (oldItem is QuotesUiData && newItem is QuotesUiData) {
+                    oldItem.quote == newItem.quote && oldItem.author == newItem.author
+                } else {
+                    false
                 }
-            )
+            },
+            delegate = NewsAdapterDelegate { view, _ ->
+                view.profileUrl.movementMethod = LinkMovementMethod.getInstance()
+            },
         )
     }
 
@@ -50,7 +54,6 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.news_fragment, container, false)
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar.inflateMenu(R.menu.toolbar_menu)
@@ -65,11 +68,15 @@ class NewsFragment : Fragment() {
             }
             true
         }
-        paging_view.init(adapter) {
-            viewModel.refreshNews()
-        }
-        viewModel.uiStateObserve {
+        paging_view.adapter = adapter
+        paging_view.refreshCallback = viewModel::refresh
+        paging_view.itemMoved = viewModel::onMove
+        paging_view.itemRemoved = viewModel::onRemove
+        viewModel.pagingStateObserve {
             paging_view.render(it)
+        }
+        viewModel.observeErrors {
+            it?.let { snack(it.message.toString()) }
         }
     }
 }

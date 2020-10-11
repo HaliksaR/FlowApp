@@ -5,23 +5,21 @@ import android.text.Spanned
 import android.text.style.URLSpan
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.news_item.view.*
+import kotlinx.android.synthetic.main.quotes_item.view.*
 import ru.haliksar.flowapp.features.news.presentation.R
-import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
+import ru.haliksar.flowapp.features.news.presentation.uidata.QuotesUiData
 import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewHolder
 
-class NewsAdapterDelegate(
-    private val clickListener: (View, NewsUiData) -> Unit
+class QuotesAdapterDelegate(
+    private val clickListener: (View, QuotesUiData) -> Unit
 ) : AdapterDelegate<MutableList<Any>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        NewsViewHolder(parent, clickListener)
+        QuotesViewHolder(parent, clickListener)
 
     override fun isForViewType(items: MutableList<Any>, position: Int): Boolean = true
 
@@ -30,19 +28,17 @@ class NewsAdapterDelegate(
         position: Int,
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
-    ) = (holder as NewsViewHolder).bind(items[position] as NewsUiData)
+    ) = (holder as QuotesViewHolder).bind(items[position] as QuotesUiData)
 
-    private inner class NewsViewHolder(
+    private inner class QuotesViewHolder(
         private val view: ViewGroup,
-        private val clickListener: ((View, NewsUiData) -> Unit)? = null
-    ) : BaseViewHolder<NewsUiData>(view, R.layout.news_item) {
+        private val clickListener: ((View, QuotesUiData) -> Unit)? = null
+    ) : BaseViewHolder<QuotesUiData>(view, R.layout.quotes_item) {
 
         override fun bindContent() {
-            itemView.title.text = data.title
-            itemView.description.text = data.description
             itemView.name.text = data.author.name
             itemView.surname.text = data.author.surname
-            itemView.postDate.text = data.postDate.toString()
+            itemView.quote.text = data.quote
 
             data.author.profileUrl.let {
                 val link = SpannableString(it.text)
@@ -55,26 +51,11 @@ class NewsAdapterDelegate(
                 itemView.profileUrl.text = link
             }
             setAvatar()
-            setPictures()
         }
 
         private fun setAvatar() {
             itemView.avatar.load(data.author.avatarUrl) {
                 transformations(CircleCropTransformation())
-            }
-        }
-
-        private fun setPictures() {
-            data.pictures?.forEach {
-                itemView.pictures.addView(
-                    ImageView(view.context).apply {
-                        scaleType = ImageView.ScaleType.FIT_CENTER
-                        adjustViewBounds = true
-                        load(it.link) {
-                            scale(Scale.FILL)
-                        }
-                    }
-                )
             }
         }
 

@@ -13,9 +13,10 @@ import org.koin.core.component.KoinApiExtension
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.core.presentation.ext.toast
-import ru.haliksar.flowapp.libraries.flowbinding.clicksFlow
-import ru.haliksar.flowapp.libraries.flowbinding.oneWayFlow
-import ru.haliksar.flowapp.libraries.flowbinding.twoWayFlow
+import ru.haliksar.flowapp.libraries.flowbinding.clicks.clicksFlow
+import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlow
+import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlowS
+import ru.haliksar.flowapp.libraries.flowbinding.twoway.twoWayFlow
 
 @KoinApiExtension
 class SignInFragment : Fragment() {
@@ -29,13 +30,14 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.sign_in_fragment, container, false)
 
-
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
             textView.oneWayFlow(lifecycleScope, loginFlow)
-            edit_text_login.twoWayFlow(lifecycleScope, loginFlow)
+            edit_text_login.oneWayFlowS(lifecycleScope, loginFlow) {
+                setText(it)
+            }
             edit_text_password.twoWayFlow(lifecycleScope, passwordFlow)
             button_sign_in.clicksFlow(lifecycleScope, true) {
                 startSignIn()
