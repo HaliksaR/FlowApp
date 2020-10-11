@@ -55,6 +55,7 @@ fun applyAppPlugin(project: Project) {
             versionName = AppConfigs.versionName
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+        signingSetups()
         buildTypesSetups()
         javaVersionSetups()
         packagingOptions {
@@ -80,6 +81,22 @@ fun applyAndroidLibraryPlugin(project: Project, path: String) {
 fun applyLibraryPlugin(project: Project, path: String) {
     project.dependencies {
         kotlin()
+    }
+}
+
+fun BaseExtension.signingSetups() {
+    signingConfigs {
+        create(BuildTypes.signingConfigs) {
+            keyAlias = AppConfigs.keyAlias
+            keyPassword = AppConfigs.keyPass
+            storePassword = AppConfigs.keyStore
+            storeFile = file("$rootDir/buildSrc/test.jks")
+        }
+    }
+    buildTypes {
+        getByName(BuildTypes.release) {
+            signingConfig = signingConfigs.findByName(BuildTypes.signingConfigs)
+        }
     }
 }
 
