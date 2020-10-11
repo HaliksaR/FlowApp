@@ -17,8 +17,8 @@ import ru.haliksar.flowapp.features.news.presentation.uidata.NewsMapperUiDataT
 import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
+import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
 import ru.haliksar.flowapp.libraries.network.wrappers.NetworkException
-import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
 import ru.haliksar.flowapp.libraries.paging.mutable.ActionMutable
 import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableViewModel
 
@@ -43,7 +43,7 @@ class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
     override fun loadNewPage(page: Int) {
         newsUseCase(page).onEach { news ->
             when (news) {
-                is NetworkResponse.Success -> {
+                is NetResponse.Success -> {
                     paging.proceed(
                         ActionMutable.NewPage(
                             pageNumber = page + 1,
@@ -51,7 +51,7 @@ class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
                         )
                     )
                 }
-                is NetworkResponse.Error -> {
+                is NetResponse.Error -> {
                     paging.proceed(ActionMutable.PageError(news.exception))
                 }
             }

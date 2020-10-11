@@ -1,14 +1,11 @@
 package ru.haliksar.flowApp.features.user.signin.presentation
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
@@ -26,7 +23,7 @@ import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
 import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
 import ru.haliksar.flowapp.libraries.core.domain.useCase
 import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewModel
-import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
+import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
 
 @ExperimentalCoroutinesApi
 @KoinApiExtension
@@ -42,18 +39,16 @@ class SignInViewModel : BaseViewModel<UiState>() {
     private val authMapper
             by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
 
-    val loginFlow = MutableStateFlow("")
-    val passwordFlow = MutableStateFlow("")
+    val signInData = SignInUiData(
+        login = MutableStateFlow(""),
+        password = MutableStateFlow("")
+    )
 
     init {
-        loginFlow.onEach {
-            Log.d("twoWayFlow", it)
-        }.launchIn(viewModelScope)
-        loginFlow.value = "twoWayFlow"
         viewModelScope.launch(Dispatchers.IO) {
             while (true) {
-                loginFlow.value = getRandomString(10)
-                delay(10000)
+                signInData.login.value = getRandomString(10)
+                delay(1000)
             }
         }
     }
@@ -66,19 +61,16 @@ class SignInViewModel : BaseViewModel<UiState>() {
     }
 
     fun startSignIn() {
-        if (loginFlow.value.isNotBlank() && passwordFlow.value.isNotBlank()) {
+        if (signInData.validate()) {
             uiState.loading()
             viewModelScope.launch(Dispatchers.IO) {
-                useCase(
-                    signInMapper.toEntity(
-                        SignInUiData(loginFlow.value, passwordFlow.value)
-                    )
-                ).collect {
-                    when (it) {
-                        is NetworkResponse.Success -> uiState.success(authMapper.toUiData(it.data))
-                        is NetworkResponse.Error -> uiState.error(it.exception)
+                useCase(signInMapper.toEntity(signInData))
+                    .collect {
+                        when (it) {
+                            is NetResponse.Success -> uiState.success(authMapper.toUiData(it.data))
+                            is NetResponse.Error -> uiState.error(it.exception)
+                        }
                     }
-                }
             }
         }
     }

@@ -5,12 +5,12 @@ import ru.haliksar.flowApp.features.user.signin.domain.entity.AuthEntity
 import ru.haliksar.flowApp.features.user.signin.domain.entity.SignInEntity
 import ru.haliksar.flowApp.features.user.signin.domain.repository.SignInRepository
 import ru.haliksar.flowapp.libraries.core.domain.UseCase
-import ru.haliksar.flowapp.libraries.network.wrappers.NetworkResponse
+import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
 
-typealias SignInUseCaseT = UseCase<Flow<NetworkResponse<out AuthEntity>>, SignInEntity>
+typealias SignInUseCaseT = UseCase<Flow<NetResponse<AuthEntity>>, SignInEntity>
 
 class SignInUseCase(private val repository: SignInRepository) : SignInUseCaseT {
 
-    override fun invoke(param: SignInEntity): Flow<NetworkResponse<out AuthEntity>> =
+    override fun invoke(param: SignInEntity): Flow<NetResponse<AuthEntity>> =
         repository.signIn(param)
 }

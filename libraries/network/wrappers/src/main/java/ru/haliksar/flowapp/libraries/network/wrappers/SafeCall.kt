@@ -9,9 +9,9 @@ import java.net.UnknownHostException
 
 fun <T> safeCallFlow(
     action: suspend () -> Flow<T>
-): Flow<NetworkResponse<out T>> = flow {
+): Flow<NetResponse<T>> = flow {
     try {
-        action().collect { emit(NetworkResponse.Success(it)) }
+        action().collect { emit(NetResponse.Success(it)) }
     } catch (exception: Exception) {
         emit(checkException(exception))
     }
@@ -19,13 +19,13 @@ fun <T> safeCallFlow(
 
 fun <T> safeCallFlowEmpty(
     action: suspend () -> Flow<T?>
-): Flow<NetworkResponse<out T?>> = flow {
+): Flow<NetResponse<T?>> = flow {
     try {
-        action().collect { emit(NetworkResponse.Success(it)) }
+        action().collect { emit(NetResponse.Success(it)) }
     } catch (npe: KotlinNullPointerException) {
-        NetworkResponse.Success(null)
+        NetResponse.Success(null)
     } catch (npe: NullPointerException) {
-        NetworkResponse.Success(null)
+        NetResponse.Success(null)
     } catch (httpE: HttpException) {
         emit(checkException(httpE))
     } catch (exception: Exception) {
@@ -35,8 +35,8 @@ fun <T> safeCallFlowEmpty(
 
 suspend fun <T> safeCall(
     action: suspend () -> T
-): NetworkResponse<out T> = try {
-    NetworkResponse.Success(action())
+): NetResponse<T> = try {
+    NetResponse.Success(action())
 } catch (exception: Exception) {
     checkException(exception)
 }
@@ -58,5 +58,5 @@ fun Exception.toNetworkException(): NetworkException {
     )
 }
 
-private fun checkException(exception: Exception): NetworkResponse.Error =
-    NetworkResponse.Error(exception.toNetworkException())
+private fun checkException(exception: Exception): NetResponse.Error =
+    NetResponse.Error(exception.toNetworkException())
