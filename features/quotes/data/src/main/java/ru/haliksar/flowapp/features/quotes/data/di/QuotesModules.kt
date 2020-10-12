@@ -1,11 +1,11 @@
 package ru.haliksar.flowapp.features.quotes.data.di
 
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.haliksar.flowapp.features.quotes.data.api.QuotesApi
+import ru.haliksar.flowapp.features.quotes.data.datasource.QuotesPagingDataSource
 import ru.haliksar.flowapp.features.quotes.data.datasource.QuotesPagingDataSourceImpl
 import ru.haliksar.flowapp.features.quotes.data.dto.QuotesMapperDto
 import ru.haliksar.flowapp.features.quotes.data.dto.QuotesMapperDtoT
@@ -28,7 +28,7 @@ internal val QuotesDataMappersModule = module {
 
 @OptIn(KoinApiExtension::class)
 internal val QuotesDataSourceModule = module {
-    factory<PagingSource<Int, QuotesEntity>> { QuotesPagingDataSourceImpl(get()) }
+    factory<QuotesPagingDataSource> { QuotesPagingDataSourceImpl(get()) }
 }
 
 @OptIn(KoinApiExtension::class)

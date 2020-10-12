@@ -47,8 +47,7 @@ class NewsViewModel : PagingMutableViewModel<NewsUiData>(), KoinComponent {
                     paging.proceed(
                         ActionMutable.NewPage(
                             pageNumber = page + 1,
-                            items = news.data.map { mapperNews.toUiData(it) }
-                        )
+                            items = news.data.map { mapperNews.toUiData(it) })
                     )
                 }
                 is NetResponse.Error -> {

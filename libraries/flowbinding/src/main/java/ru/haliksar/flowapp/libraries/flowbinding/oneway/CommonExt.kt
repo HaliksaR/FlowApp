@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @ExperimentalCoroutinesApi
-inline fun <T : View, S> T.oneWayFlowS(
+inline fun <T : View, S> T.oneWayFlowC(
     flow: Flow<S>,
     crossinline setter: T.(S) -> Unit
 ) = flow.onEach {
@@ -18,17 +18,15 @@ inline fun <T : View, S> T.oneWayFlowS(
 }
 
 @ExperimentalCoroutinesApi
-inline fun <T : View, S> T.oneWayFlowS(
+inline fun <T : View, S> T.oneWayFlowC(
     scope: CoroutineScope,
     flow: Flow<S>,
     crossinline setter: T.(S) -> Unit
-) = oneWayFlowS<T, S>(flow, setter)
-    .launchIn(scope)
+) = oneWayFlowC<T, S>(flow, setter).launchIn(scope)
 
 @ExperimentalCoroutinesApi
-inline fun <T : View, S> T.oneWayFlowS(
+inline fun <T : View, S> T.oneWayFlowC(
     owner: LifecycleOwner,
     flow: Flow<S>,
     crossinline setter: T.(S) -> Unit
-) = oneWayFlowS<T, S>(flow, setter)
-    .launchIn(owner.lifecycle.coroutineScope)
+) = oneWayFlowC<T, S>(flow, setter).launchIn(owner.lifecycle.coroutineScope)
