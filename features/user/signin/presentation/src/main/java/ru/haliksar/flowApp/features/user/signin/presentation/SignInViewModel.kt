@@ -5,7 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.qualifier.named
@@ -39,10 +40,7 @@ class SignInViewModel : BaseViewModel<UiState>() {
     private val authMapper
             by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
 
-    val signInData = SignInUiData(
-        login = MutableStateFlow(""),
-        password = MutableStateFlow("")
-    )
+    val signInData = SignInUiData()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -63,15 +61,13 @@ class SignInViewModel : BaseViewModel<UiState>() {
     fun startSignIn() {
         if (signInData.validate()) {
             uiState.loading()
-            viewModelScope.launch(Dispatchers.IO) {
-                useCase(signInMapper.toEntity(signInData))
-                    .collect {
-                        when (it) {
-                            is NetResponse.Success -> uiState.success(authMapper.toUiData(it.data))
-                            is NetResponse.Error -> uiState.error(it.exception)
-                        }
+            useCase(signInMapper.toEntity(signInData))
+                .onEach {
+                    when (it) {
+                        is NetResponse.Success -> uiState.success(authMapper.toUiData(it.data))
+                        is NetResponse.Error -> uiState.error(it.exception)
                     }
-            }
+                }.launchIn(viewModelScope)
         }
     }
 }

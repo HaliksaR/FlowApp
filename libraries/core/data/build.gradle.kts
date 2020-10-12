@@ -4,10 +4,6 @@ plugins {
 }
 
 dependencies {
-    modules(
-        Modules.Libraries.Core.domain
-    )
     coroutines()
-    gson()
     koin()
 }

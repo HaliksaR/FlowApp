@@ -4,9 +4,6 @@ plugins {
 }
 
 dependencies {
-    modules(
-        Modules.Libraries.Core.data
-    )
     kotlin()
     gson()
     coroutines()

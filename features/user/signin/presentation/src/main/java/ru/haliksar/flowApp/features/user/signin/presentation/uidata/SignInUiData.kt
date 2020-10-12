@@ -7,8 +7,8 @@ import ru.haliksar.flowapp.libraries.core.data.mapper.MapperUiData
 
 @ExperimentalCoroutinesApi
 data class SignInUiData(
-    val login: MutableStateFlow<String>,
-    val password: MutableStateFlow<String>
+    val login: MutableStateFlow<String> = MutableStateFlow(""),
+    val password: MutableStateFlow<String> = MutableStateFlow("")
 ) {
     fun validate(): Boolean =
         login.value.isNotBlank() && password.value.isNotBlank()

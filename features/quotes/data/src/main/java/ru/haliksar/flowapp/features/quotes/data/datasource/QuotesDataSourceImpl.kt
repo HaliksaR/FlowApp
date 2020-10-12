@@ -1,6 +1,5 @@
 package ru.haliksar.flowapp.features.quotes.data.datasource
 
-import androidx.paging.PagingSource
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
@@ -13,10 +12,9 @@ import ru.haliksar.flowapp.libraries.core.data.mapper.MapperDto
 import ru.haliksar.flowapp.libraries.core.data.mapper.mapperDto
 import ru.haliksar.flowapp.libraries.network.pagingwrappers.safeCallPaging
 
-
 @KoinApiExtension
-class QuotesPagingDataSourceImpl(private val api: QuotesApi) : PagingSource<Int, QuotesEntity>(),
-    KoinComponent {
+class QuotesPagingDataSourceImpl(private val api: QuotesApi) :
+    QuotesPagingDataSource(), KoinComponent {
 
     private val mapper
             by mapperDto<MapperDto<QuotesEntity, QuotesDto>>(named(QUOTES_MAPPER_DTO))

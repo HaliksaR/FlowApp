@@ -12,21 +12,24 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @ExperimentalCoroutinesApi
-inline fun EditText.asFlow(
-    crossinline take: (CharSequence) -> Unit
-) = callbackFlow {
-    val watcher = doAfterTextChanged { offer(it.toString()) }
+fun EditText.asFlow() = callbackFlow {
+    val watcher = doAfterTextChanged { offer(it?.toString()) }
     awaitClose { removeTextChangedListener(watcher) }
-}.onEach { take(it) }
+}
+
+@ExperimentalCoroutinesApi
+inline fun EditText.asFlow(
+    crossinline take: (CharSequence?) -> Unit
+) = asFlow().onEach { take(it) }
 
 @ExperimentalCoroutinesApi
 inline fun EditText.asFlow(
     scope: CoroutineScope,
-    crossinline take: (CharSequence) -> Unit
+    crossinline take: (CharSequence?) -> Unit
 ) = asFlow(take).launchIn(scope)
 
 @ExperimentalCoroutinesApi
 inline fun EditText.asFlow(
     owner: LifecycleOwner,
-    crossinline take: (CharSequence) -> Unit
+    crossinline take: (CharSequence?) -> Unit
 ) = asFlow(take).launchIn(owner.lifecycle.coroutineScope)

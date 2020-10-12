@@ -22,10 +22,9 @@ class Store<T : Any>(scope: CoroutineScope) : CoroutineScope by scope {
     val sideEffects = Channel<SideEffect>()
 
     fun proceed(action: Action) {
-        val newState =
-            reducer<T>(action, render.value) { sideEffect ->
-                launch { sideEffects.send(sideEffect) }
-            }
+        val newState = reducer<T>(action, render.value) { sideEffect ->
+            launch { sideEffects.send(sideEffect) }
+        }
         if (newState != render.value) {
             render.value = newState
         }
@@ -39,11 +38,7 @@ private fun <T : Any> reducer(
 ): State =
     when (action) {
         is Action.Refresh -> {
-            sideEffectListener(
-                SideEffect.LoadPage(
-                    1
-                )
-            )
+            sideEffectListener(SideEffect.LoadPage(1))
             when (state) {
                 is State.Empty -> State.EmptyProgress
                 is State.EmptyError -> State.EmptyProgress

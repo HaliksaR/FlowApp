@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Libraries.Core.presentation)
+    coreModules(Modules.Libraries.Core.presentation)
     coroutines()
     fragment()
     impl(Libs.Androidx.Lifecycle.runtimeKtx)

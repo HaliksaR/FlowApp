@@ -14,7 +14,7 @@ import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.core.presentation.ext.toast
 import ru.haliksar.flowapp.libraries.flowbinding.clicks.clicksFlow
-import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlowS
+import ru.haliksar.flowapp.libraries.flowbinding.oneway.oneWayFlowC
 import ru.haliksar.flowapp.libraries.flowbinding.twoway.twoWayFlow
 
 @KoinApiExtension
@@ -33,7 +33,7 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewModel) {
-            textView.oneWayFlowS(lifecycleScope, signInData.login) {
+            textView.oneWayFlowC(lifecycleScope, signInData.login) {
                 text = it
             }
             edit_text_login.twoWayFlow(lifecycleScope, signInData.login)

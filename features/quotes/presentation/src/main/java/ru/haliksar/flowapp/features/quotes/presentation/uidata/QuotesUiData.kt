@@ -3,12 +3,12 @@ package ru.haliksar.flowapp.features.quotes.presentation.uidata
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.qualifier.named
+import ru.haliksar.flowapp.features.news.shared.presentation.di.AUTHOR_MAPPER_UIDATA
+import ru.haliksar.flowapp.features.news.shared.presentation.uidata.AuthorMapperUiDataT
+import ru.haliksar.flowapp.features.news.shared.presentation.uidata.AuthorUiData
 import ru.haliksar.flowapp.features.quotes.domain.entity.QuotesEntity
 import ru.haliksar.flowapp.libraries.core.data.mapper.MapperUiData
 import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
-import ru.haliksar.flowapp.libraries.core.presentation.di.AUTHOR_MAPPER_UIDATA
-import ru.haliksar.flowapp.libraries.core.presentation.uidata.AuthorMapperUiDataT
-import ru.haliksar.flowapp.libraries.core.presentation.uidata.AuthorUiData
 
 data class QuotesUiData(
     val author: AuthorUiData,

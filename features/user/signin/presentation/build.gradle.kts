@@ -5,12 +5,14 @@ plugins {
 }
 
 dependencies {
+    coreModules(
+        Modules.Libraries.Core.presentation,
+        Modules.Libraries.Core.data,
+        Modules.Libraries.Core.domain
+    )
     modules(
         Modules.Features.User.SignIn.domain,
         Modules.Features.User.SignIn.data,
-        Modules.Libraries.Core.presentation,
-        Modules.Libraries.Core.data,
-        Modules.Libraries.Core.domain,
         Modules.Libraries.Network.wrappers,
         Modules.Libraries.fllowbinding
     )
