@@ -3,6 +3,7 @@
 package ru.haliksar.flowapp.app.injector
 
 import org.koin.core.KoinApplication
+import ru.haliksar.flowApp.features.user.accounts.injector.AccountsModules
 import ru.haliksar.flowApp.features.user.signin.injector.SignInModules
 import ru.haliksar.flowapp.features.news.injector.NewsModules
 import ru.haliksar.flowapp.features.news.shared.injector.NewsSharedModules
@@ -16,5 +17,6 @@ fun KoinApplication.koinModuleManager() {
     modules(NetworkModule, FakeNetworkModule)
     modules(SignInModules)
     modules(NewsModules + NewsSharedModules)
+    modules(AccountsModules)
     modules(QuotesModules)
 }

@@ -20,6 +20,7 @@ val SignInViewModelModule = module {
 const val AUTH_MAPPER_UIDATA = "AUTH_MAPPER_UIDATA "
 const val SIGN_IN_MAPPER_UIDATA = "SIGN_IN_MAPPER_UIDATA"
 
+@ExperimentalCoroutinesApi
 val SignInDataMappersModule = module {
     factory<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA)) { AuthMapperUiData() }
     factory<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA)) { SignInMapperUiData() }

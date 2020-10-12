@@ -19,4 +19,9 @@
         android:name="ru.haliksar.flowapp.features.quotes.presentation.QuotesFragment"
         android:label="QuotesFragment" />
 
+    <fragment
+        android:id="@+id/accountsFragment"
+        android:name="ru.haliksar.flowApp.features.user.accounts.presentation.AccountsFragment"
+        android:label="AccountsFragment" />
+
 </navigation>

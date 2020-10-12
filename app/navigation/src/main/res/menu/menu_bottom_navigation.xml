@@ -11,5 +11,9 @@
     <item
         android:id="@+id/signInFragment"
         android:icon="@drawable/ic_baseline_account_box_24"
-        android:title="@string/user" />
+        android:title="@string/sign_in" />
+    <item
+        android:id="@+id/accountsFragment"
+        android:icon="@drawable/ic_baseline_beach_access_24"
+        android:title="@string/accounts" />
 </menu>
