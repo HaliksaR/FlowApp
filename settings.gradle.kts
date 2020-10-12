@@ -45,3 +45,10 @@ include(
     ":features:quotes:data",
     ":features:quotes:presentation"
 )
+
+include(
+    ":features:user:accounts:injector",
+    ":features:user:accounts:presentation",
+    ":features:user:accounts:data",
+    ":features:user:accounts:domain"
+)

@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -67,7 +68,8 @@ class SignInViewModel : BaseViewModel<UiState>() {
                         is NetResponse.Success -> uiState.success(authMapper.toUiData(it.data))
                         is NetResponse.Error -> uiState.error(it.exception)
                     }
-                }.launchIn(viewModelScope)
+                }.flowOn(Dispatchers.IO)
+                .launchIn(viewModelScope)
         }
     }
 }
