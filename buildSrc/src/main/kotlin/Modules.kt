@@ -26,6 +26,14 @@ object Modules {
             val data = "$News:data"
             val presentation = "$News:presentation"
             val injector = "$News:injector"
+
+            object Shared {
+                override fun toString() = "$News:shared"
+                val domain = "$Shared:domain"
+                val data = "$Shared:data"
+                val presentation = "$Shared:presentation"
+                val injector = "$Shared:injector"
+            }
         }
 
         object Quotes {
@@ -45,7 +53,6 @@ object Modules {
             val data = "$Core:data"
             val domain = "$Core:domain"
             val presentation = "$Core:presentation"
-            val injector = "$Core:injector"
         }
 
         object Network {

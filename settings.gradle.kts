@@ -11,8 +11,7 @@ include(":libraries:paging")
 include(
     ":libraries:core:presentation",
     ":libraries:core:data",
-    ":libraries:core:domain",
-    ":libraries:core:injector"
+    ":libraries:core:domain"
 )
 
 include(
@@ -32,7 +31,12 @@ include(
     ":features:news:injector",
     ":features:news:data",
     ":features:news:domain",
-    ":features:news:presentation"
+    ":features:news:presentation",
+
+    ":features:news:shared:injector",
+    ":features:news:shared:data",
+    ":features:news:shared:domain",
+    ":features:news:shared:presentation"
 )
 
 include(

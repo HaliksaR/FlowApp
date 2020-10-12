@@ -18,7 +18,6 @@ import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
 import ru.haliksar.flowapp.libraries.core.presentation.ext.snack
 import ru.haliksar.flowapp.libraries.paging.mutable.PagingMutableAdapter
 
-
 @ObsoleteCoroutinesApi
 @FlowPreview
 @ExperimentalCoroutinesApi

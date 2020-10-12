@@ -1,7 +1,7 @@
 package ru.haliksar.flowapp.features.news.domain.entity
 
-import ru.haliksar.flowapp.libraries.core.domain.entity.AuthorEntity
-import ru.haliksar.flowapp.libraries.core.domain.entity.UrlEntity
+import ru.haliksar.flowapp.features.news.shared.domain.entity.AuthorEntity
+import ru.haliksar.flowapp.features.news.shared.domain.entity.UrlEntity
 import java.util.*
 
 

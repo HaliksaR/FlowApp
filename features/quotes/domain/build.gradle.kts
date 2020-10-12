@@ -4,7 +4,8 @@ plugins {
 }
 
 dependencies {
-    modules(Modules.Libraries.Core.domain)
+    coreModules(Modules.Libraries.Core.domain)
+    sharedModules(Modules.Features.News.Shared.domain)
     coroutines()
     koin()
 }
