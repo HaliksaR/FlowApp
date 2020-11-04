@@ -11,7 +11,6 @@ buildscript {
     dependencies {
         classpath(Libs.Gradle.androidPlugin)
         classpath(Libs.Kotlin.gradlePlugin)
-        classpath(Libs.Hilt.gradlePlugin)
         classpath(Libs.Koin.gradlePlugin)
     }
 }
@@ -20,20 +19,26 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://jitpack.io")
     }
 }
 
-subProjects(Modules.Path.libraries, Modules.Path.feature) {
+subprojects {
+    project.tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    }
     project.plugins.whenPluginAdded {
         when (this) {
-            is AppPlugin -> applyAppPlugin(project)
-            is LibraryPlugin -> applyLibraryPlugin(project, path)
+            is AppPlugin -> applyAppPlugin(path)
+            is LibraryPlugin -> applyAndroidLibraryPlugin(path)
+            is JavaLibraryPlugin -> applyLibraryPlugin(path)
         }
     }
 }
 
-fun applyAppPlugin(project: Project) {
-    project.configure<BaseExtension> {
+fun Project.applyAppPlugin(path: String) {
+    configure<BaseExtension> {
         compileSdkVersion(AppConfigs.compileSdkVersion)
         defaultConfig {
             applicationId = AppConfigs.applicationId
@@ -43,30 +48,42 @@ fun applyAppPlugin(project: Project) {
             versionName = AppConfigs.versionName
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+        buildFeatures.viewBinding = true
+        signingSetups()
         buildTypesSetups()
         javaVersionSetups()
-    }
-    project.dependencies {
-        kotlin()
-    }
-}
-
-fun applyLibraryPlugin(project: Project, path: String) {
-    project.configure<BaseExtension> {
-        compileSdkVersion(30)
-        javaVersionSetups()
-        defaultConfig.javaCompileOptions.annotationProcessorOptions {
-            arguments + Libs.Androidx.Room.arguments(projectDir)
+        packagingOptions {
+            exclude("META-INF/*.kotlin_module")
         }
     }
+    dependencies.kotlin()
+}
 
-    project.dependencies {
-        kotlin()
+fun Project.applyAndroidLibraryPlugin(path: String) {
+    configure<BaseExtension> {
+        compileSdkVersion(30)
+        buildFeatures.viewBinding = true
+        javaVersionSetups()
     }
+    dependencies.kotlin()
+}
 
-    when {
-        path.startsWith(Modules.Path.libraries) -> {
-            /*config*/
+fun Project.applyLibraryPlugin(path: String) {
+    dependencies.kotlin()
+}
+
+fun BaseExtension.signingSetups() {
+    signingConfigs {
+        create(BuildTypes.signingConfigs) {
+            keyAlias = AppConfigs.keyAlias
+            keyPassword = AppConfigs.keyPass
+            storePassword = AppConfigs.keyStore
+            storeFile = file("$rootDir/buildSrc/test.jks")
+        }
+    }
+    buildTypes {
+        getByName(BuildTypes.release) {
+            signingConfig = signingConfigs.findByName(BuildTypes.signingConfigs)
         }
     }
 }
@@ -95,12 +112,4 @@ fun BaseExtension.javaVersionSetups() {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-}
-
-fun subProjects(vararg folders: String, action: Action<in Project>) {
-    folders.forEach { if (project.path == it) return }
-    subprojects(action)
 }

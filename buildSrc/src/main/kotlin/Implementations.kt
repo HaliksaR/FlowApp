@@ -5,11 +5,24 @@ fun DependencyHandler.modules(vararg module: String) {
     module.forEach { impl(project(it)) }
 }
 
-fun DependencyHandler.hilt() {
-    impl(Libs.Hilt.android)
-    kapt(Libs.Hilt.compiler)
-    testImpl(Libs.Hilt.testing)
-    kaptTest(Libs.Hilt.compiler)
+fun DependencyHandler.modules(vararg module: Any) {
+    module.forEach { impl(project(it.toString())) }
+}
+
+fun DependencyHandler.sharedModules(vararg module: Any) {
+    module.forEach { impl(project(it.toString())) }
+}
+
+fun DependencyHandler.sharedModules(vararg module: String) {
+    module.forEach { impl(project(it)) }
+}
+
+fun DependencyHandler.coreModules(vararg module: Any) {
+    module.forEach { impl(project(it.toString())) }
+}
+
+fun DependencyHandler.coreModules(vararg module: String) {
+    module.forEach { impl(project(it)) }
 }
 
 fun DependencyHandler.kotlin() {
@@ -60,11 +73,14 @@ fun DependencyHandler.okhttpMockWebServer() {
 }
 
 fun DependencyHandler.moshi() {
-    testImpl(Libs.Moshi)
+    impl(Libs.Moshi)
 }
 
 fun DependencyHandler.moshiForRetrofit() {
-    testImpl(Libs.Moshi.retrofit)
+    impl(Libs.Moshi)
+    impl(Libs.Moshi.kt)
+    impl(Libs.Moshi.converter)
+    impl(Libs.Moshi.adapter)
 }
 
 fun DependencyHandler.room() {
@@ -72,4 +88,37 @@ fun DependencyHandler.room() {
     kapt(Libs.Androidx.Room.compiler)
     impl(Libs.Androidx.Room.ktx)
     testImpl(Libs.Androidx.Room.testing)
+}
+
+fun DependencyHandler.gson() {
+    impl(Libs.Gson)
+}
+
+fun DependencyHandler.gsonRetrofit() {
+    impl(Libs.Gson)
+    impl(Libs.Gson.converter)
+}
+
+fun DependencyHandler.rxKotlin() {
+    impl(Libs.RxKotlin)
+}
+
+fun DependencyHandler.rxRetrofit() {
+    impl(Libs.RxJava.adapter)
+}
+
+fun DependencyHandler.rxAndroid() {
+    impl(Libs.RxAndroid)
+}
+
+fun DependencyHandler.fragment() {
+    impl(Libs.Androidx.Fragment.ktx)
+    impl(Libs.Androidx.Fragment)
+    impl(Libs.Androidx.Fragment.testing)
+}
+
+fun DependencyHandler.navigation() {
+    impl(Libs.Androidx.Navigation.uiKtx)
+    impl(Libs.Androidx.Navigation.fragmentKtx)
+    androidTestImpl(Libs.Androidx.Navigation.testing)
 }

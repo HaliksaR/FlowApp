@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/newsFragment"
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="@string/news" />
+    <item
+        android:id="@+id/quotesFragment"
+        android:icon="@drawable/ic_baseline_comment_24"
+        android:title="@string/quotes" />
+    <item
+        android:id="@+id/signInFragment"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="@string/sign_in" />
+    <item
+        android:id="@+id/accountsFragment"
+        android:icon="@drawable/ic_baseline_beach_access_24"
+        android:title="@string/accounts" />
+</menu>

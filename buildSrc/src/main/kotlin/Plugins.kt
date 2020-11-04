@@ -11,7 +11,6 @@ object Plugins {
         const val kapt = "kotlin-kapt"
     }
 
-    const val hilt = "dagger.hilt.android.plugin"
     const val koin = "koin"
     const val safeargs = "androidx.navigation.safeargs"
     const val safeargsK = "androidx.navigation.safeargs.kotlin"
