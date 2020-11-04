@@ -3,7 +3,7 @@ package ru.haliksar.flowapp.features.news.presentation.paging
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.URLSpan
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,17 +11,18 @@ import coil.load
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import kotlinx.android.synthetic.main.news_item.view.*
-import ru.haliksar.flowapp.features.news.presentation.R
-import ru.haliksar.flowapp.features.news.presentation.uidata.NewsUiData
+import ru.haliksar.flowapp.features.news.domain.entity.NewsEntity
+import ru.haliksar.flowapp.features.news.presentation.databinding.NewsItemBinding
 import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewHolder
 
 class NewsAdapterDelegate(
-    private val clickListener: (View, NewsUiData) -> Unit
+    private val clickListener: (NewsItemBinding, NewsEntity) -> Unit
 ) : AdapterDelegate<MutableList<Any>>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        NewsViewHolder(parent, clickListener)
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        val binding = NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NewsViewHolder(binding, clickListener)
+    }
 
     override fun isForViewType(items: MutableList<Any>, position: Int): Boolean = true
 
@@ -30,19 +31,19 @@ class NewsAdapterDelegate(
         position: Int,
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
-    ) = (holder as NewsViewHolder).bind(items[position] as NewsUiData)
+    ) = (holder as NewsViewHolder).bind(items[position] as NewsEntity)
 
-    private inner class NewsViewHolder(
-        private val view: ViewGroup,
-        private val clickListener: ((View, NewsUiData) -> Unit)? = null
-    ) : BaseViewHolder<NewsUiData>(view, R.layout.news_item) {
+    class NewsViewHolder(
+        private val binding: NewsItemBinding,
+        private val clickListener: ((NewsItemBinding, NewsEntity) -> Unit)? = null
+    ) : BaseViewHolder<NewsEntity>(binding) {
 
         override fun bindContent() {
-            itemView.title.text = data.title
-            itemView.description.text = data.description
-            itemView.name.text = data.author.name
-            itemView.surname.text = data.author.surname
-            itemView.postDate.text = data.postDate.toString()
+            binding.title.text = data.title
+            binding.description.text = data.description
+            binding.name.text = data.author.name
+            binding.surname.text = data.author.surname
+            binding.postDate.text = data.postDate.toString()
 
             data.author.profileUrl.let {
                 val link = SpannableString(it.text)
@@ -52,22 +53,22 @@ class NewsAdapterDelegate(
                     it.text.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-                itemView.profileUrl.text = link
+                binding.profileUrl.text = link
             }
             setAvatar()
             setPictures()
         }
 
         private fun setAvatar() {
-            itemView.avatar.load(data.author.avatarUrl) {
+            binding.avatar.load(data.author.avatarUrl) {
                 transformations(CircleCropTransformation())
             }
         }
 
         private fun setPictures() {
             data.pictures?.forEach {
-                itemView.pictures.addView(
-                    ImageView(view.context).apply {
+                binding.pictures.addView(
+                    ImageView(binding.pictures.context).apply {
                         scaleType = ImageView.ScaleType.FIT_CENTER
                         adjustViewBounds = true
                         load(it.link) {
@@ -79,7 +80,7 @@ class NewsAdapterDelegate(
         }
 
         override fun setListeners() {
-            clickListener?.invoke(itemView, data)
+            clickListener?.invoke(binding, data)
         }
     }
 }

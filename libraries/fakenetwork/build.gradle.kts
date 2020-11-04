@@ -7,18 +7,17 @@ plugins {
 dependencies {
     modules(
         Modules.Libraries.Network,
-        Modules.Libraries.Network.wrappers,
         Modules.Features.User.SignIn.data,
         Modules.Features.News.data,
         Modules.Features.Quotes.data
     )
+    implementation(fileTree("$rootDir/libs") { include(Libs.HaliksaR.fakeOkHttpInterceptor) })
     retrofit()
     gsonRetrofit()
     impl(Libs.Okhttp3.logging)
     impl(Libs.Retrofit.converterScalars)
     koin()
-    rxKotlin()
-    rxRetrofit()
+    koinAndroidX()
     impl(Libs.Androidx.Appcompat)
     impl(Libs.Koin.android)
     coroutines()

@@ -1,43 +1,51 @@
 package ru.haliksar.flowApp.features.user.accounts.data.datasource
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import kotlinx.coroutines.withContext
 import ru.haliksar.flowApp.features.user.accounts.data.dao.AccountsDao
-import ru.haliksar.flowApp.features.user.accounts.data.dto.UserMapperDto
+import ru.haliksar.flowApp.features.user.accounts.data.mapper.toDto
+import ru.haliksar.flowApp.features.user.accounts.data.mapper.toListEntity
 import ru.haliksar.flowApp.features.user.accounts.domain.entity.UserEntity
-import ru.haliksar.flowapp.libraries.core.data.mapper.toListEntity
 
-@KoinApiExtension
 class AccountsDataSourceImpl(
     private val dao: AccountsDao
-) : AccountsDataSource, KoinComponent {
-
-    private val mapper by inject<UserMapperDto>()
+) : AccountsDataSource {
 
     override fun getUsers(): Flow<List<UserEntity>> =
-        dao.getAll().toListEntity(mapper)
+        dao.getAll().map { it.toListEntity() }
+            .flowOn(Dispatchers.IO)
 
     override fun getUserSortedByName(): Flow<List<UserEntity>> =
-        dao.getAll().map { it.sortedBy { it.name } }.toListEntity(mapper)
+        dao.getAll().map { it.sortedBy { it.name }.toListEntity() }
+            .flowOn(Dispatchers.IO)
 
     override fun getUserSortedBySurname(): Flow<List<UserEntity>> =
-        dao.getAll().map { it.sortedBy { it.surname } }.toListEntity(mapper)
+        dao.getAll().map { it.sortedBy { it.surname }.toListEntity() }
+            .flowOn(Dispatchers.IO)
 
     override fun getUserSortedByAge(): Flow<List<UserEntity>> =
-        dao.getAll().map { it.sortedBy { it.age } }.toListEntity(mapper)
+        dao.getAll().map { it.sortedBy { it.age }.toListEntity() }
+            .flowOn(Dispatchers.IO)
 
     override fun getUserSortedByLogin(): Flow<List<UserEntity>> =
-        dao.getAll().map { it.sortedBy { it.login } }.toListEntity(mapper)
+        dao.getAll().map { it.sortedBy { it.login }.toListEntity() }
+            .flowOn(Dispatchers.IO)
 
-    override fun delete(id: Int) =
-        dao.delete(id)
+    override suspend fun delete(id: Int) =
+        withContext(Dispatchers.IO) {
+            dao.delete(id)
+        }
 
-    override fun add(user: UserEntity) =
-        dao.insert(mapper.toDto(user))
+    override suspend fun add(user: UserEntity) =
+        withContext(Dispatchers.IO) {
+            dao.insert(user.toDto())
+        }
 
-    override fun deleteAll() =
-        dao.deleteAll()
+    override suspend fun deleteAll() =
+        withContext(Dispatchers.IO) {
+            dao.deleteAll()
+        }
 }

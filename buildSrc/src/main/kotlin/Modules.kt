@@ -2,7 +2,7 @@ object Modules {
     object App {
         override fun toString() = ":app"
         val injector = "$App:injector"
-        val navigation = "$App:navigation"
+        val navigation = "$App:navigation_graph"
     }
 
     object Features {
@@ -16,7 +16,6 @@ object Modules {
                 val domain = "$SignIn:domain"
                 val data = "$SignIn:data"
                 val presentation = "$SignIn:presentation"
-                val injector = "$SignIn:injector"
             }
 
             object Accounts {
@@ -24,7 +23,6 @@ object Modules {
                 val domain = "$Accounts:domain"
                 val data = "$Accounts:data"
                 val presentation = "$Accounts:presentation"
-                val injector = "$Accounts:injector"
             }
         }
 
@@ -33,14 +31,11 @@ object Modules {
             val domain = "$News:domain"
             val data = "$News:data"
             val presentation = "$News:presentation"
-            val injector = "$News:injector"
 
             object Shared {
                 override fun toString() = "$News:shared"
                 val domain = "$Shared:domain"
                 val data = "$Shared:data"
-                val presentation = "$Shared:presentation"
-                val injector = "$Shared:injector"
             }
         }
 
@@ -49,7 +44,6 @@ object Modules {
             val domain = "$Quotes:domain"
             val data = "$Quotes:data"
             val presentation = "$Quotes:presentation"
-            val injector = "$Quotes:injector"
         }
     }
 
@@ -58,8 +52,6 @@ object Modules {
 
         object Core {
             override fun toString() = "$Libraries:core"
-            val data = "$Core:data"
-            val domain = "$Core:domain"
             val presentation = "$Core:presentation"
         }
 

@@ -7,23 +7,17 @@ plugins {
 dependencies {
     coreModules(
         Modules.Libraries.Core.presentation,
-        Modules.Libraries.Core.data,
-        Modules.Libraries.Core.domain
+        Modules.Libraries.fllowbinding
     )
     modules(
         Modules.Features.Quotes.domain,
-        Modules.Features.Quotes.data,
-        Modules.Libraries.Network.wrappers,
-        Modules.App.navigation,
-        Modules.Libraries.fllowbinding
+        Modules.Features.Quotes.data
     )
     sharedModules(
         Modules.Features.News.Shared.data,
-        Modules.Features.News.Shared.domain,
-        Modules.Features.News.Shared.presentation
+        Modules.Features.News.Shared.domain
     )
     impl(Libs.Androidx.Lifecycle.lifecycleViewModel)
-    impl(Libs.Androidx.Lifecycle.livedataKtx)
     impl(Libs.Androidx.Lifecycle.runtimeKtx)
     impl(Libs.Androidx.Recyclerview)
     impl(Libs.Androidx.Swiperefreshlayout)

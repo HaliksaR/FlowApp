@@ -1,7 +1,6 @@
 package ru.haliksar.flowapp.features.quotes.data.repository
 
 import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinApiExtension
@@ -14,17 +13,9 @@ import ru.haliksar.flowapp.features.quotes.domain.repository.QuotesPagingReposit
 @KoinApiExtension
 class QuotesRepositoryImpl : QuotesPagingRepository<PagingData<QuotesEntity>>, KoinComponent {
 
-    companion object {
-        const val DEFAULT_PAGE_INDEX = 1
-        private const val DEFAULT_PAGE_SIZE = 20
-
-        fun getDefaultPageConfig(): PagingConfig =
-            PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true)
-    }
-
     override fun getQuotes(): Flow<PagingData<QuotesEntity>> =
         Pager(
-            getDefaultPageConfig(),
+            config = QuotesPagingDataSource.getDefaultPageConfig(),
             pagingSourceFactory = { get<QuotesPagingDataSource>() }
         ).flow
 }

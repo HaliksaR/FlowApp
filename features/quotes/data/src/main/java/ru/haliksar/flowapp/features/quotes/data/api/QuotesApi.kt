@@ -6,7 +6,7 @@ import ru.haliksar.flowapp.features.quotes.data.dto.QuotesDto
 
 interface QuotesApi {
     companion object {
-        const val URL = "/api/v1/quotes/"
+        const val URL = "/api/v1/quotes"
     }
 
     @POST(URL)

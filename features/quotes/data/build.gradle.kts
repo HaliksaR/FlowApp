@@ -6,21 +6,15 @@ plugins {
 
 dependencies {
     coreModules(
-        Modules.Libraries.Core.data
-    )
-    modules(
         Modules.Libraries.Network,
-        Modules.Libraries.Network.wrappers,
-        Modules.Libraries.Network.pagingwrappers,
-        Modules.Features.Quotes.domain
+        Modules.Libraries.Network.pagingwrappers
     )
     sharedModules(
         Modules.Features.News.Shared.domain,
         Modules.Features.News.Shared.data
     )
-    retrofit()
+    modules(Modules.Features.Quotes.domain)
     impl(Libs.Androidx.Paging.runtime)
     coroutines()
-    gson()
     koin()
 }

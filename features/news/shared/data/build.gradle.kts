@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-    coreModules(Modules.Libraries.Core.data)
     sharedModules(Modules.Features.News.Shared.domain)
     coroutines()
     gson()

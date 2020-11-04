@@ -1,7 +1,6 @@
 package ru.haliksar.flowapp.libraries.paging.notmutable
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +15,6 @@ sealed class Action {
     data class PageError(val error: Exception) : Action()
 }
 
-@ExperimentalCoroutinesApi
 class Store<T : Any>(scope: CoroutineScope) : CoroutineScope by scope {
     val render = MutableStateFlow<State>(State.Empty)
     val sideEffects = Channel<SideEffect>()

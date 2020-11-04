@@ -24,12 +24,12 @@ class AccountsRepositoryImpl(
     override fun getUserSortedByLogin(): Flow<List<UserEntity>> =
         dataSource.getUserSortedByLogin()
 
-    override fun delete(id: Int) =
+    override suspend fun delete(id: Int) =
         dataSource.delete(id)
 
-    override fun add(user: UserEntity) =
+    override suspend fun add(user: UserEntity) =
         dataSource.add(user)
 
-    override fun deleteAll() =
+    override suspend fun deleteAll() =
         dataSource.deleteAll()
 }

@@ -9,14 +9,12 @@ dependencies {
         Modules.Libraries.retroFlow,
         Modules.Libraries.Network.wrappers
     )
-    retrofit()
-    gsonRetrofit()
+    api(Libs.Retrofit)
+    api(Libs.Gson)
+    impl(Libs.Gson.converter)
     impl(Libs.Okhttp3.logging)
     impl(Libs.Retrofit.converterScalars)
-    koin()
-    rxKotlin()
-    rxRetrofit()
-    impl(Libs.Androidx.Appcompat)
     impl(Libs.Koin.android)
+    koin()
     coroutines()
 }

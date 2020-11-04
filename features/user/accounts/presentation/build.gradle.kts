@@ -7,8 +7,7 @@ plugins {
 dependencies {
     coreModules(
         Modules.Libraries.Core.presentation,
-        Modules.Libraries.Core.data,
-        Modules.Libraries.Core.domain
+        Modules.Libraries.fllowbinding
     )
     modules(
         Modules.Features.User.Accounts.domain,

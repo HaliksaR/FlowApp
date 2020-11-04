@@ -9,7 +9,7 @@ object Libs {
     object Kotlin {
         private const val version = "1.4.10"
         private const val versionCoroutines =
-            "1.3.9" // https://github.com/Kotlin/kotlinx.coroutines
+            "1.4.0" // https://github.com/Kotlin/kotlinx.coroutines
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
@@ -20,7 +20,7 @@ object Libs {
     }
 
     object Koin { //https://github.com/InsertKoinIO/koin
-        private const val version = "2.2.0-rc-2"
+        private const val version = "2.2.0-rc-4"
         const val gradlePlugin = "org.koin:koin-gradle-plugin:$version"
         const val core = "org.koin:koin-core:$version"
         const val coreExt = "org.koin:koin-core-ext:$version"
@@ -251,5 +251,9 @@ object Libs {
     object Coil {
         private const val version = "1.0.0-rc3"
         override fun toString() = "io.coil-kt:coil:$version"
+    }
+
+    object HaliksaR {
+        const val fakeOkHttpInterceptor = "fakeokhttpinterceptor.jar"
     }
 }

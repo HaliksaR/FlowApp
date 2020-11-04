@@ -17,7 +17,6 @@ fun DependencyHandler.sharedModules(vararg module: String) {
     module.forEach { impl(project(it)) }
 }
 
-
 fun DependencyHandler.coreModules(vararg module: Any) {
     module.forEach { impl(project(it.toString())) }
 }

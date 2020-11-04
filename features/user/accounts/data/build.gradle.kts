@@ -6,7 +6,6 @@ plugins {
 }
 
 dependencies {
-    coreModules(Modules.Libraries.Core.data)
     modules(Modules.Features.User.Accounts.domain)
     room()
     coroutines()

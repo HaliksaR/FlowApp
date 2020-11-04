@@ -1,6 +1,5 @@
 package ru.haliksar.flowApp.features.user.signin.data.api
 
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.POST
 import ru.haliksar.flowApp.features.user.signin.data.dto.AuthDto
@@ -15,5 +14,5 @@ interface SignInApi {
 
     @POST(URL)
     @Timeout(5, TimeUnit.SECONDS)
-    fun signIn(@Body data: SignInDto): Flow<AuthDto>
+    suspend fun signIn(@Body data: SignInDto): AuthDto
 }

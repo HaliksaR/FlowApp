@@ -9,7 +9,7 @@ interface AccountsDataSource {
     fun getUserSortedBySurname(): Flow<List<UserEntity>>
     fun getUserSortedByAge(): Flow<List<UserEntity>>
     fun getUserSortedByLogin(): Flow<List<UserEntity>>
-    fun delete(id: Int)
-    fun add(user: UserEntity)
-    fun deleteAll()
+    suspend fun delete(id: Int)
+    suspend fun add(user: UserEntity)
+    suspend fun deleteAll()
 }

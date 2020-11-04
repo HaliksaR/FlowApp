@@ -6,9 +6,7 @@ plugins {
 
 dependencies {
     coreModules(
-        Modules.Libraries.Core.presentation,
-        Modules.Libraries.Core.data,
-        Modules.Libraries.Core.domain
+        Modules.Libraries.Core.presentation
     )
     modules(
         Modules.Features.User.SignIn.domain,

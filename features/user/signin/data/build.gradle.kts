@@ -5,16 +5,10 @@ plugins {
 }
 
 dependencies {
-    coreModules(
-        Modules.Libraries.Core.data
-    )
     modules(
         Modules.Features.User.SignIn.domain,
-        Modules.Libraries.Network,
-        Modules.Libraries.Network.wrappers
+        Modules.Libraries.Network
     )
-    retrofit()
     coroutines()
-    gson()
     koin()
 }

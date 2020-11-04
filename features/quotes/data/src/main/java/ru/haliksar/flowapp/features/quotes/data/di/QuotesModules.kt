@@ -7,8 +7,6 @@ import org.koin.dsl.module
 import ru.haliksar.flowapp.features.quotes.data.api.QuotesApi
 import ru.haliksar.flowapp.features.quotes.data.datasource.QuotesPagingDataSource
 import ru.haliksar.flowapp.features.quotes.data.datasource.QuotesPagingDataSourceImpl
-import ru.haliksar.flowapp.features.quotes.data.dto.QuotesMapperDto
-import ru.haliksar.flowapp.features.quotes.data.dto.QuotesMapperDtoT
 import ru.haliksar.flowapp.features.quotes.data.repository.QuotesRepositoryImpl
 import ru.haliksar.flowapp.features.quotes.domain.entity.QuotesEntity
 import ru.haliksar.flowapp.features.quotes.domain.repository.QuotesPagingRepository
@@ -19,14 +17,6 @@ internal val QuotesApiModule = module {
     factory<QuotesApi> { createRetrofitService(get(named(FAKE))) }
 }
 
-const val QUOTES_MAPPER_DTO = "QUOTES_MAPPER_DTO"
-
-@OptIn(KoinApiExtension::class)
-internal val QuotesDataMappersModule = module {
-    factory<QuotesMapperDtoT>(named(QUOTES_MAPPER_DTO)) { QuotesMapperDto() }
-}
-
-@OptIn(KoinApiExtension::class)
 internal val QuotesDataSourceModule = module {
     factory<QuotesPagingDataSource> { QuotesPagingDataSourceImpl(get()) }
 }
@@ -38,7 +28,6 @@ internal val QuotesRepositoryModule = module {
 
 val QuotesDataModules = listOf(
     QuotesApiModule,
-    QuotesDataMappersModule,
     QuotesDataSourceModule,
     QuotesRepositoryModule
 )

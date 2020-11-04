@@ -1,23 +1,11 @@
 package ru.haliksar.flowapp.features.quotes.data.datasource
 
-import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.KoinComponent
-import org.koin.core.qualifier.named
 import ru.haliksar.flowapp.features.quotes.data.api.QuotesApi
-import ru.haliksar.flowapp.features.quotes.data.di.QUOTES_MAPPER_DTO
-import ru.haliksar.flowapp.features.quotes.data.dto.QuotesDto
-import ru.haliksar.flowapp.features.quotes.data.repository.QuotesRepositoryImpl.Companion.DEFAULT_PAGE_INDEX
+import ru.haliksar.flowapp.features.quotes.data.mapper.toEntity
 import ru.haliksar.flowapp.features.quotes.domain.entity.QuotesEntity
-import ru.haliksar.flowapp.libraries.core.data.mapper.MapperDto
-import ru.haliksar.flowapp.libraries.core.data.mapper.mapperDto
 import ru.haliksar.flowapp.libraries.network.pagingwrappers.safeCallPaging
 
-@KoinApiExtension
-class QuotesPagingDataSourceImpl(private val api: QuotesApi) :
-    QuotesPagingDataSource(), KoinComponent {
-
-    private val mapper
-            by mapperDto<MapperDto<QuotesEntity, QuotesDto>>(named(QUOTES_MAPPER_DTO))
+class QuotesPagingDataSourceImpl(private val api: QuotesApi) : QuotesPagingDataSource() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, QuotesEntity> =
         safeCallPaging(
@@ -27,8 +15,6 @@ class QuotesPagingDataSourceImpl(private val api: QuotesApi) :
             api.getQuotes(
                 page = params.key ?: DEFAULT_PAGE_INDEX,
                 size = params.loadSize
-            ).map {
-                mapper.toEntity(it)
-            }
+            ).map { it.toEntity() }
         }
 }

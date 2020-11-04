@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-    kotlin()
     gson()
     coroutines()
     retrofit()

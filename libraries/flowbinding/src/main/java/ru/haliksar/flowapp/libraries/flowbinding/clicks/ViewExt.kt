@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.haliksar.flowapp.libraries.core.presentation.ext.hideKeyboard
 
-@ExperimentalCoroutinesApi
 inline fun View.clicksFlow(
     closeKeyBoard: Boolean = false,
     crossinline action: () -> Unit

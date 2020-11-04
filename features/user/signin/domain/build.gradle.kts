@@ -4,8 +4,5 @@ plugins {
 }
 
 dependencies {
-    coreModules(Modules.Libraries.Core.domain)
-    modules(Modules.Libraries.Network.wrappers)
-    coroutines()
     koin()
 }

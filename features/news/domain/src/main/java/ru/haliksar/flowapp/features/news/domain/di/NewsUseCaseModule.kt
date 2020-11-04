@@ -1,12 +1,12 @@
 package ru.haliksar.flowapp.features.news.domain.di
 
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.haliksar.flowapp.features.news.domain.usecase.NewsUseCase
-import ru.haliksar.flowapp.features.news.domain.usecase.NewsUseCaseT
+import ru.haliksar.flowapp.features.news.domain.usecase.GetNewsUseCase
 
-const val NEWS_USECASE = "NEWS_USECASE"
-
-val NewsUseCaseModule = module {
-    factory<NewsUseCaseT>(named(NEWS_USECASE)) { NewsUseCase(get()) }
+internal val NewsUseCaseModule = module {
+    factory { GetNewsUseCase(get()) }
 }
+
+val NewsDomainModules = listOf(
+    NewsUseCaseModule
+)

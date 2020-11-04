@@ -5,41 +5,27 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinApiExtension
-import org.koin.core.qualifier.named
-import ru.haliksar.flowApp.features.user.signin.domain.di.SIGN_IN_USECASE
-import ru.haliksar.flowApp.features.user.signin.domain.usecase.SignInUseCaseT
-import ru.haliksar.flowApp.features.user.signin.presentation.di.AUTH_MAPPER_UIDATA
-import ru.haliksar.flowApp.features.user.signin.presentation.di.SIGN_IN_MAPPER_UIDATA
-import ru.haliksar.flowApp.features.user.signin.presentation.uidata.AuthMapperUiDataT
-import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInMapperUiDataT
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import ru.haliksar.flowApp.features.user.signin.domain.usecase.SignInUseCase
+import ru.haliksar.flowApp.features.user.signin.presentation.mapper.toEntity
 import ru.haliksar.flowApp.features.user.signin.presentation.uidata.SignInUiData
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.UiState
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.error
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.loading
 import ru.haliksar.flowApp.features.user.signin.presentation.uistate.success
-import ru.haliksar.flowapp.libraries.core.data.mapper.mapperUiData
-import ru.haliksar.flowapp.libraries.core.domain.useCase
-import ru.haliksar.flowapp.libraries.core.presentation.base.BaseViewModel
-import ru.haliksar.flowapp.libraries.network.wrappers.NetResponse
+import ru.haliksar.flowapp.libraries.core.presentation.base.StateViewModel
+import ru.haliksar.flowapp.libraries.network.wrappers.toNetworkException
 
 @ExperimentalCoroutinesApi
 @KoinApiExtension
-class SignInViewModel : BaseViewModel<UiState>() {
+class SignInViewModel : StateViewModel<UiState>(), KoinComponent {
 
     override val uiState = MutableStateFlow<UiState>(UiState.Input)
 
-    private val useCase by useCase<SignInUseCaseT>(named(SIGN_IN_USECASE))
-
-    private val signInMapper
-            by mapperUiData<SignInMapperUiDataT>(named(SIGN_IN_MAPPER_UIDATA))
-
-    private val authMapper
-            by mapperUiData<AuthMapperUiDataT>(named(AUTH_MAPPER_UIDATA))
+    private val useCase by inject<SignInUseCase>()
 
     val signInData = SignInUiData()
 
@@ -62,14 +48,13 @@ class SignInViewModel : BaseViewModel<UiState>() {
     fun startSignIn() {
         if (signInData.validate()) {
             uiState.loading()
-            useCase(signInMapper.toEntity(signInData))
-                .onEach {
-                    when (it) {
-                        is NetResponse.Success -> uiState.success(authMapper.toUiData(it.data))
-                        is NetResponse.Error -> uiState.error(it.exception)
-                    }
-                }.flowOn(Dispatchers.IO)
-                .launchIn(viewModelScope)
+            viewModelScope.launch {
+                try {
+                    uiState.success(useCase(signInData.toEntity()))
+                } catch (throwable: Throwable) {
+                    uiState.error(throwable.toNetworkException())
+                }
+            }
         }
     }
 }
